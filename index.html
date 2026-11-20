@@ -8,7 +8,7 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=rosticceria">
+<link rel="stylesheet" href="style.css?v=ritiro">
 <script src="ordini.js?v=10" defer></script>
 <script src="effetti.js" defer></script>
 </head>
@@ -75,8 +75,8 @@
   </section>
 
   <section class="orders section-space" id="ordinazioni" aria-labelledby="titolo-ordinazioni">
-    <div class="wrap orders-grid">
-      <div>
+    <div class="wrap orders-layout">
+      <div class="orders-intro">
         <h2 class="reveal" id="titolo-ordinazioni">Dolci e rustici su ordinazione</h2>
         <p class="orders-lead">Prepariamo torte e mignon per compleanni, cerimonie e altre occasioni, oltre ad assortimenti di rustici su richiesta.</p>
       </div>
@@ -91,78 +91,76 @@
             </div>
           </fieldset>
           <form id="order-torte" class="order-form" aria-label="Ordinazione pasticceria">
-            <fieldset class="order-group">
-              <legend>Dati per il ritiro</legend>
+            <fieldset class="order-group order-products">
+              <legend>Scelta dei prodotti</legend>
               <div class="order-fields">
-              <div><label for="torte-surname">Cognome</label><input id="torte-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
-              <div><label for="torte-date">Giorno di ritiro</label><input id="torte-date" name="date" type="date" required></div>
+                <div>
+                  <label for="cake-type">Prodotto</label>
+                  <select id="cake-type" name="type" required>
+                    <option value="">Seleziona</option>
+                    <option>Torta gelato</option>
+                    <option>Torta classica</option>
+                    <option>Mignon</option>
+                  </select>
+                </div>
+                <div id="cake-format">
+                  <label for="cake-size">Formato</label>
+                  <select id="cake-size" name="size" aria-describedby="cake-size-help" required>
+                    <option value="">Seleziona</option>
+                    <option>Piccola</option>
+                    <option>Media</option>
+                    <option>Grande</option>
+                  </select>
+                  <p class="field-help" id="cake-size-help">Il formato determina il peso della torta.</p>
+                </div>
+                <div id="mignon-weight-field" hidden>
+                  <label for="mignon-weight">Peso dei mignon (g)</label>
+                  <select id="mignon-weight" name="weight" aria-describedby="mignon-weight-help" required disabled>
+                    <option value="">Seleziona il peso</option>
+                    <option value="250">250 g</option>
+                    <option value="500">500 g</option>
+                    <option value="750">750 g</option>
+                    <option value="1000">1 kg</option>
+                    <option value="1250">1,25 kg</option>
+                    <option value="1500">1,5 kg</option>
+                    <option value="1750">1,75 kg</option>
+                    <option value="2000">2 kg</option>
+                    <option value="2250">2,25 kg</option>
+                    <option value="2500">2,5 kg</option>
+                  </select>
+                  <p class="field-help" id="mignon-weight-help">Da 250 g a 2,5 kg.</p>
+                </div>
+              </div>
+              <div>
+                <label for="cake-flavours">Gusti</label>
+                <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
+              </div>
+              <div id="cake-topping-field" hidden>
+                <label for="cake-topping">Copertura <span class="field-optional">· facoltativa</span></label>
+                <select id="cake-topping" name="topping" disabled>
+                  <option value="">Seleziona la copertura</option>
+                  <option>Panna</option>
+                  <option>Glassa al cioccolato</option>
+                </select>
+              </div>
+              <div id="cake-decoration">
+                <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
+                <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
               </div>
             </fieldset>
-            <div class="order-fields">
-              <div>
-                <label for="cake-type">Prodotto</label>
-                <select id="cake-type" name="type" required>
-                  <option value="">Seleziona</option>
-                  <option>Torta gelato</option>
-                  <option>Torta classica</option>
-                  <option>Mignon</option>
-                </select>
-              </div>
-              <div id="cake-format">
-                <label for="cake-size">Formato</label>
-                <select id="cake-size" name="size" aria-describedby="cake-size-help" required>
-                  <option value="">Seleziona</option>
-                  <option>Piccola</option>
-                  <option>Media</option>
-                  <option>Grande</option>
-                </select>
-                <p class="field-help" id="cake-size-help">Il formato determina il peso della torta.</p>
-              </div>
-              <div id="mignon-weight-field" hidden>
-                <label for="mignon-weight">Peso dei mignon (g)</label>
-                <select id="mignon-weight" name="weight" aria-describedby="mignon-weight-help" required disabled>
-                  <option value="">Seleziona il peso</option>
-                  <option value="250">250 g</option>
-                  <option value="500">500 g</option>
-                  <option value="750">750 g</option>
-                  <option value="1000">1 kg</option>
-                  <option value="1250">1,25 kg</option>
-                  <option value="1500">1,5 kg</option>
-                  <option value="1750">1,75 kg</option>
-                  <option value="2000">2 kg</option>
-                  <option value="2250">2,25 kg</option>
-                  <option value="2500">2,5 kg</option>
-                </select>
-                <p class="field-help" id="mignon-weight-help">Da 250 g a 2,5 kg.</p>
-              </div>
+            <div class="order-side">
+              <fieldset class="order-group">
+                <legend>Dati per il ritiro</legend>
+                <div class="order-fields">
+                <div><label for="torte-surname">Cognome</label><input id="torte-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
+                <div><label for="torte-date">Giorno di ritiro</label><input id="torte-date" name="date" type="date" required></div>
+                </div>
+              </fieldset>
+              <button class="button primary order-submit" type="submit">Continua su WhatsApp</button>
             </div>
-            <div>
-              <label for="cake-flavours">Gusti</label>
-              <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
-            </div>
-            <div id="cake-topping-field" hidden>
-              <label for="cake-topping">Copertura <span class="field-optional">· facoltativa</span></label>
-              <select id="cake-topping" name="topping" disabled>
-                <option value="">Seleziona la copertura</option>
-                <option>Panna</option>
-                <option>Glassa al cioccolato</option>
-              </select>
-            </div>
-            <div id="cake-decoration">
-              <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
-              <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
-            </div>
-            <button class="button primary order-submit" type="submit">Continua su WhatsApp</button>
           </form>
           <form id="order-rosticceria" class="order-form" aria-label="Ordinazione rosticceria" hidden>
-            <fieldset class="order-group">
-              <legend>Dati per il ritiro</legend>
-              <div class="order-fields">
-              <div><label for="rustici-surname">Cognome</label><input id="rustici-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
-              <div><label for="rustici-date">Giorno di ritiro</label><input id="rustici-date" name="date" type="date" required></div>
-              </div>
-            </fieldset>
-            <fieldset class="rustici-options" aria-describedby="rustici-help">
+            <fieldset class="rustici-options order-products" aria-describedby="rustici-help">
               <legend>Prodotti e quantità</legend>
               <p class="field-help" id="rustici-help">Apri una categoria per scegliere le varietà. Usa − e + per indicare le quantità.</p>
               <div class="rustici-grid">
@@ -313,18 +311,27 @@
               </div>
               <p class="field-error" id="rustici-error" role="alert" hidden>Aggiungi almeno un pezzo per proseguire.</p>
             </fieldset>
-            <div>
-              <label for="rustici-notes">Preferenze <span class="field-optional">· facoltativo</span></label>
-              <textarea id="rustici-notes" name="notes" maxlength="300" rows="2" placeholder="Ad esempio: confezioni separate"></textarea>
-            </div>
-            <section class="rustici-recap" id="rustici-recap" aria-labelledby="rustici-recap-title" hidden>
-              <div class="recap-heading">
-                <h4 id="rustici-recap-title">Riepilogo</h4>
-                <span id="rustici-recap-total"></span>
+            <div class="order-side">
+              <fieldset class="order-group">
+                <legend>Dati per il ritiro</legend>
+                <div class="order-fields">
+                <div><label for="rustici-surname">Cognome</label><input id="rustici-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
+                <div><label for="rustici-date">Giorno di ritiro</label><input id="rustici-date" name="date" type="date" required></div>
+                </div>
+              </fieldset>
+              <div>
+                <label for="rustici-notes">Preferenze <span class="field-optional">· facoltativo</span></label>
+                <textarea id="rustici-notes" name="notes" maxlength="300" rows="2" placeholder="Ad esempio: confezioni separate"></textarea>
               </div>
-              <ul id="rustici-recap-items"></ul>
-            </section>
-            <button class="button primary order-submit" type="submit">Continua su WhatsApp</button>
+              <section class="rustici-recap" id="rustici-recap" aria-labelledby="rustici-recap-title" hidden>
+                <div class="recap-heading">
+                  <h4 id="rustici-recap-title">Riepilogo</h4>
+                  <span id="rustici-recap-total"></span>
+                </div>
+                <ul id="rustici-recap-items"></ul>
+              </section>
+              <button class="button primary order-submit" type="submit">Continua su WhatsApp</button>
+            </div>
           </form>
           <p class="note">Potrai modificare il messaggio prima di inviarlo. <a href="privacy.html">Privacy</a></p>
         </div>

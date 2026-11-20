@@ -82,14 +82,14 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .offer-card p { color: var(--muted); }
 .note { margin-top: .9rem; font-size: .875rem; color: var(--muted); }
 .orders { color: var(--paper); background: var(--accent); }
-.orders-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(1.6rem, 6vw, 5rem); align-items: start; }
+.orders-layout { display: grid; gap: clamp(1.2rem, 3vw, 2rem); }
 .orders h2 { font-size: clamp(2.25rem, 4.65vw, 3.55rem); text-wrap: balance; }
-.orders-lead { margin: 1.1rem 0 .55rem; max-width: 46ch; }
+.orders-lead { margin-top: .65rem; max-width: 68ch; }
 .order-panel { min-width: 0; padding: clamp(1rem, 3vw, 1.75rem); color: var(--ink); background: var(--card); border: 1px solid #e4ebe0; border-radius: 1.55rem; box-shadow: 0 .8rem 2.5rem #162d2160; }
 .order-form label { display: block; font-size: .875rem; font-weight: 750; margin-bottom: .32rem; }
 .order-form input:not([type="checkbox"]), .order-form select, .order-form textarea { width: 100%; min-width: 0; min-height: 2.75rem; border: 1px solid #9dac9b; border-radius: .4rem; background: white; color: var(--ink); font: inherit; padding: .45rem .55rem; }
 .order-fields { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
-.order-panel .note { margin-top: .55rem; }
+.order-panel .note { margin-top: .75rem; }
 .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.65rem, 2vw, 1.25rem); margin-top: 1.25rem; }
 .gallery-grid img { display: block; width: 100%; height: auto; border-radius: .35rem; }
 .gallery-grid figcaption { margin-top: .45rem; color: var(--muted); font-size: .88rem; }
@@ -107,7 +107,7 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .footer { border-top: 1px solid var(--line); }
 @media (max-width: 760px) {
   .wrap { width: calc(100% - 2rem); }
-  .orders-grid, .footer-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
   .hero h1 { max-width: 14ch; font-size: clamp(3.35rem, 11vw, 5.5rem); }
   .hero::before { background: linear-gradient(270deg, #142c20f0, #142c2098); }
   .hero-visual img { object-position: 21% center; }
@@ -119,10 +119,16 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
   .order-fields { grid-template-columns: 1fr; }
 }
 
-.order-form { display: grid; gap: .9rem; margin-top: 1rem; }
+.order-form { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr); align-items: start; gap: 1rem clamp(1rem, 3.5vw, 2.5rem); margin-top: 1.25rem; }
+.order-products { min-width: 0; }
+#order-torte .order-products { display: grid; gap: .8rem; }
+.order-side { display: grid; min-width: 0; gap: .85rem; padding: clamp(.85rem, 2vw, 1.25rem); border: 1px solid var(--line); border-radius: .85rem; background: #f4f7ef; }
+.order-side .order-group { border: 0; padding: 0; }
+.order-side .order-group legend { margin-bottom: .5rem; }
 .order-form .button { justify-self: start; }
 .order-switch, .order-group, .rustici-options { min-width: 0; border: 0; margin: 0; padding: 0; }
 .order-switch legend, .order-group legend, .rustici-options legend { padding: 0; font-weight: 800; font-size: .98rem; }
+.order-switch { max-width: 29rem; }
 .order-switch-options { display: grid; grid-template-columns: 1fr 1fr; gap: .35rem; margin-top: .6rem; padding: .25rem; border-radius: .75rem; background: var(--light); }
 .order-switch-options label { position: relative; }
 .order-switch-options input { position: absolute; opacity: 0; width: 1px; height: 1px; }
@@ -188,3 +194,7 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .recap-heading span { font-size: .85rem; font-weight: 800; }
 .rustici-recap ul { display: grid; gap: .28rem; margin: .55rem 0 0; padding: .45rem 0 0; list-style: none; border-top: 1px solid #cadcc6; font-size: .85rem; }
 .rustici-recap strong { white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .order-form { grid-template-columns: 1fr; }
+}
