@@ -70,6 +70,7 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .note { margin-top: .9rem; font-size: .875rem; color: var(--muted); }
 .orders { color: var(--paper); background: var(--accent); }
 .orders-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(1.6rem, 6vw, 5rem); align-items: start; }
+.orders h2 { font-size: clamp(2.25rem, 4.65vw, 3.55rem); text-wrap: balance; }
 .orders-lead { margin: 1.1rem 0 .55rem; max-width: 46ch; }
 .orders-lead + p { color: #e1ecd8; font-size: .95rem; }
 .order-panel { min-width: 0; padding: clamp(1rem, 3vw, 1.75rem); color: var(--ink); background: var(--card); border-radius: 1.35rem; box-shadow: 0 .8rem 2.5rem #162d2160; }
