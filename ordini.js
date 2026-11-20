@@ -85,6 +85,7 @@ const products = [...savouryForm.querySelectorAll(".quantity-row")].map((row) =>
   const quantity = row.querySelector("[data-quantity]");
   const decrease = row.querySelector('[data-step="-1"]');
   const increase = row.querySelector('[data-step="1"]');
+  const group = row.closest(".quantity-group");
 
   row.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-step]");
@@ -95,6 +96,12 @@ const products = [...savouryForm.querySelectorAll(".quantity-row")].map((row) =>
     decrease.setAttribute("aria-disabled", String(next === 0));
     row.toggleAttribute("data-selected", next > 0);
     if (next > 0) rusticiError.hidden = true;
+
+    if (group) {
+      const total = [...group.querySelectorAll("[data-quantity]")]
+        .reduce((sum, item) => sum + Number(item.value), 0);
+      group.querySelector(".quantity-total").textContent = total ? `${total} ${total === 1 ? "pezzo" : "pezzi"}` : "3 varietà";
+    }
   });
 
   return { quantity, increase };
@@ -107,7 +114,9 @@ savouryForm.addEventListener("submit", (event) => {
     .filter(({ pieces }) => pieces > 0);
   rusticiError.hidden = selected.length > 0;
   if (!selected.length) {
-    products[0].increase.focus();
+    const firstButton = products[0].increase;
+    const summary = firstButton.closest("details:not([open])")?.querySelector("summary");
+    (summary ?? firstButton).focus();
     return;
   }
 

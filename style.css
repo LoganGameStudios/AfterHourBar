@@ -167,3 +167,13 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 @media (max-width: 440px) {
   .offer { grid-template-columns: 1fr; }
 }
+
+.quantity-group { border: 1px solid var(--line); border-radius: .72rem; background: var(--card); }
+.quantity-group:has([data-selected]) { border-color: #99b398; }
+.quantity-group summary { display: flex; align-items: center; gap: .65rem; min-height: 3.6rem; padding: .5rem .85rem; border-radius: inherit; list-style: none; cursor: pointer; }
+.quantity-group summary::-webkit-details-marker { display: none; }
+.quantity-group summary:hover, .quantity-group[open] summary { background: var(--light); }
+.quantity-group summary::after { content: ""; width: .48rem; height: .48rem; border: solid var(--accent); border-width: 0 2px 2px 0; transform: rotate(45deg); margin: -.18rem .1rem 0 .15rem; }
+.quantity-group[open] summary::after { transform: rotate(225deg); margin-top: .2rem; }
+.quantity-total { margin-left: auto; color: var(--muted); font-size: .83rem; font-weight: 750; }
+.quantity-group-items { display: grid; gap: .35rem; padding: .45rem; }

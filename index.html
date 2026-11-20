@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=specialita">
-<script src="ordini.js?v=4" defer></script>
+<link rel="stylesheet" href="style.css?v=varieta">
+<script src="ordini.js?v=5" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -145,30 +145,38 @@
               <legend>Quantità per prodotto</legend>
               <p class="field-help" id="rustici-help">Usa i pulsanti − e + per scegliere i pezzi.</p>
               <div class="rustici-grid">
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-arancini-al-forno">Arancini al forno</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-forno">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al forno" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di arancini al forno" data-quantity="Arancini al forno">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al forno">+</button>
+                <details class="quantity-group">
+                  <summary>
+                    <span class="quantity-name">Arancini</span>
+                    <span class="quantity-total">3 varietà</span>
+                  </summary>
+                  <div class="quantity-group-items">
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-arancini-al-forno">Al forno</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-forno">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al forno" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di arancini al forno" data-quantity="Arancini al forno">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al forno">+</button>
+                      </div>
+                    </div>
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-arancini-al-ragu">Al ragù</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-ragu">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al ragù" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di arancini al ragù" data-quantity="Arancini al ragù">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al ragù">+</button>
+                      </div>
+                    </div>
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-arancini-con-spinaci">Con spinaci</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-con-spinaci">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini con spinaci" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di arancini con spinaci" data-quantity="Arancini con spinaci">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini con spinaci">+</button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-arancini-al-ragu">Arancini al ragù</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-ragu">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al ragù" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di arancini al ragù" data-quantity="Arancini al ragù">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al ragù">+</button>
-                  </div>
-                </div>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-arancini-con-spinaci">Arancini con spinaci</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-con-spinaci">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini con spinaci" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di arancini con spinaci" data-quantity="Arancini con spinaci">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini con spinaci">+</button>
-                  </div>
-                </div>
+                </details>
                 <div class="quantity-row">
                   <span class="quantity-name" id="product-cornetti">Cornetti salati</span>
                   <div class="quantity-stepper" role="group" aria-labelledby="product-cornetti">
