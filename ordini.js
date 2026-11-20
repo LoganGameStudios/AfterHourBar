@@ -5,6 +5,9 @@ const whatsapp = document.querySelector("#order-fallback");
 const cakeForm = document.querySelector("#order-torte");
 const savouryForm = document.querySelector("#order-rosticceria");
 const rusticiError = document.querySelector("#rustici-error");
+const rusticiRecap = document.querySelector("#rustici-recap");
+const rusticiRecapItems = document.querySelector("#rustici-recap-items");
+const rusticiRecapTotal = document.querySelector("#rustici-recap-total");
 const dayFormat = new Intl.DateTimeFormat("it-IT", { dateStyle: "long", timeZone: "UTC" });
 const italianCalendar = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/Rome", year: "numeric", month: "2-digit", day: "2-digit"
@@ -110,16 +113,37 @@ const products = [...savouryForm.querySelectorAll(".quantity-row")].map((row) =>
         .reduce((sum, item) => sum + Number(item.value), 0);
       group.querySelector(".quantity-total").textContent = total ? `${total} ${total === 1 ? "pezzo" : "pezzi"}` : "3 varietà";
     }
+    updateRusticiRecap();
   });
 
   return { quantity, increase };
 });
 
-savouryForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const selected = products
+function selectedRustici() {
+  return products
     .map(({ quantity }) => ({ name: quantity.dataset.quantity, pieces: Number(quantity.value) }))
     .filter(({ pieces }) => pieces > 0);
+}
+
+function updateRusticiRecap() {
+  const selected = selectedRustici();
+  const total = selected.reduce((sum, item) => sum + item.pieces, 0);
+  rusticiRecap.hidden = total === 0;
+  rusticiRecapTotal.textContent = `${total} ${total === 1 ? "pezzo" : "pezzi"}`;
+  rusticiRecapItems.replaceChildren(...selected.map(({ name, pieces }) => {
+    const item = document.createElement("li");
+    const label = document.createElement("span");
+    const quantity = document.createElement("strong");
+    label.textContent = name;
+    quantity.textContent = `× ${pieces}`;
+    item.append(label, quantity);
+    return item;
+  }));
+}
+
+savouryForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const selected = selectedRustici();
   rusticiError.hidden = selected.length > 0;
   if (!selected.length) {
     const firstButton = products[0].increase;
@@ -134,5 +158,6 @@ savouryForm.addEventListener("submit", (event) => {
   sendRequest(savouryForm, details);
 });
 
+updateRusticiRecap();
 whatsapp.hidden = true;
 picker.hidden = false;
