@@ -39,7 +39,7 @@ for (const form of [cakeForm, savouryForm]) {
 
 const orderSwitch = picker.querySelector(".order-switch");
 function showSelectedForm() {
-  const showCake = orderSwitch.querySelector("input:checked").value === "torte";
+  const showCake = orderSwitch.querySelector("input:checked").value === "pasticceria";
   cakeForm.hidden = !showCake;
   savouryForm.hidden = showCake;
 }
@@ -47,39 +47,73 @@ function showSelectedForm() {
 orderSwitch.addEventListener("change", showSelectedForm);
 showSelectedForm();
 
+const cakeFields = cakeForm.elements;
+const cakeFormat = document.querySelector("#cake-format");
+const cakeDecoration = document.querySelector("#cake-decoration");
+const mignonQuantity = document.querySelector("#mignon-quantity");
+
+function updatePastryOptions() {
+  const isMignon = cakeFields.type.value === "Mignon";
+  cakeFormat.hidden = isMignon;
+  cakeDecoration.hidden = isMignon;
+  cakeFields.size.disabled = isMignon;
+  cakeFields.inscription.disabled = isMignon;
+  mignonQuantity.hidden = !isMignon;
+  cakeFields.pieces.disabled = !isMignon;
+}
+
+cakeFields.type.addEventListener("change", updatePastryOptions);
+updatePastryOptions();
+
 cakeForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const fields = cakeForm.elements;
   fields.flavours.value = fields.flavours.value.trim();
-  const details = [
-    `Tipo: ${fields.type.value}`,
-    `Gusti: ${fields.flavours.value}`,
-    `Formato: ${fields.size.value}`
-  ];
-  const inscription = fields.inscription.value.trim();
-  if (inscription) details.push(`Scritta sulla torta: ${inscription}`);
+  const details = [`Prodotto: ${fields.type.value}`, `Gusti: ${fields.flavours.value}`];
+
+  if (fields.type.value === "Mignon") {
+    if (fields.pieces.value) details.push(`Quantità: ${fields.pieces.value} pezzi`);
+  } else {
+    details.push(`Formato: ${fields.size.value}`);
+    const inscription = fields.inscription.value.trim();
+    if (inscription) details.push(`Scritta sulla torta: ${inscription}`);
+  }
   sendRequest(cakeForm, details);
 });
 
-const products = [...savouryForm.querySelectorAll('input[name="rustico"]')];
-for (const product of products) {
-  product.addEventListener("change", () => {
-    if (products.some((item) => item.checked)) rusticiError.hidden = true;
+const products = [...savouryForm.querySelectorAll(".quantity-row")].map((row) => {
+  const quantity = row.querySelector("[data-quantity]");
+  const decrease = row.querySelector('[data-step="-1"]');
+  const increase = row.querySelector('[data-step="1"]');
+
+  row.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-step]");
+    if (!button || button.getAttribute("aria-disabled") === "true") return;
+
+    const next = Math.max(0, Number(quantity.value) + Number(button.dataset.step));
+    quantity.value = String(next);
+    decrease.setAttribute("aria-disabled", String(next === 0));
+    row.toggleAttribute("data-selected", next > 0);
+    if (next > 0) rusticiError.hidden = true;
   });
-}
+
+  return { quantity, increase };
+});
 
 savouryForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const selected = products.filter((item) => item.checked);
-  rusticiError.hidden = Boolean(selected.length);
+  const selected = products
+    .map(({ quantity }) => ({ name: quantity.dataset.quantity, pieces: Number(quantity.value) }))
+    .filter(({ pieces }) => pieces > 0);
+  rusticiError.hidden = selected.length > 0;
   if (!selected.length) {
-    products[0].focus();
+    products[0].increase.focus();
     return;
   }
 
-  const details = [`Rosticceria: ${selected.map((item) => item.value).join(", ")}`];
+  const details = ["Rosticceria:", ...selected.map(({ name, pieces }) => `- ${name}: ${pieces} ${pieces === 1 ? "pezzo" : "pezzi"}`)];
   const notes = savouryForm.elements.notes.value.trim();
-  if (notes) details.push(`Quantità o preferenze: ${notes}`);
+  if (notes) details.push(`Preferenze: ${notes}`);
   sendRequest(savouryForm, details);
 });
 

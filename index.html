@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=hero-destra">
-<script src="ordini.js?v=3" defer></script>
+<link rel="stylesheet" href="style.css?v=quantita">
+<script src="ordini.js?v=4" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -49,7 +49,7 @@
       <div>
         <dt>Indirizzo</dt>
         <dd><a href="https://www.google.com/maps/dir/?api=1&amp;destination=After%20Hour%20Bar%2C%20Corso%20Vittorio%20Emanuele%20346%2C%2096014%20Floridia" rel="noreferrer">Corso Vittorio Emanuele 346</a></dd>
-        <dd>96014 Floridia (SR), vicino a Via Roma</dd>
+        <dd>All’angolo con Via Roma · 96014 Floridia (SR)</dd>
       </div>
       <div>
         <dt>Orari indicativi · Lunedì–domenica</dt>
@@ -67,7 +67,7 @@
     <h2 class="reveal" id="titolo-banco">Le specialità del banco</h2>
     <ul class="offer">
       <li class="offer-card reveal"><h3>Colazione</h3><p>Espresso, cornetti e lievitati tipici siciliani.</p></li>
-      <li class="offer-card reveal"><h3>Pasticceria</h3><p>Cannoli, raviole alla ricotta e torte su ordinazione.</p></li>
+      <li class="offer-card reveal"><h3>Pasticceria</h3><p>Cannoli, raviole alla ricotta, mignon e torte su ordinazione.</p></li>
       <li class="offer-card reveal"><h3>Gelateria</h3><p>Gelati e granite di mandorla, limone, caffè e cioccolato.</p></li>
       <li class="offer-card reveal"><h3>Rosticceria</h3><p>Assortimenti di rustici al banco, da asporto e su ordinazione.</p></li>
     </ul>
@@ -77,34 +77,39 @@
   <section class="orders section-space" id="ordinazioni" aria-labelledby="titolo-ordinazioni">
     <div class="wrap orders-grid">
       <div>
-        <h2 class="reveal" id="titolo-ordinazioni">Torte e rustici su ordinazione</h2>
-        <p class="orders-lead">Prepariamo torte per compleanni, cerimonie e altre occasioni, oltre ad assortimenti di rustici su richiesta.</p>
+        <h2 class="reveal" id="titolo-ordinazioni">Dolci e rustici su ordinazione</h2>
+        <p class="orders-lead">Prepariamo torte e mignon per compleanni, cerimonie e altre occasioni, oltre ad assortimenti di rustici su richiesta.</p>
         <p>Il bar ti confermerà disponibilità, prezzo e modalità di ritiro.</p>
       </div>
       <div class="order-panel reveal">
         <div id="order-picker" hidden>
+          <h3>Prepara la tua richiesta</h3>
           <fieldset class="order-switch">
             <legend>Che cosa vuoi ordinare?</legend>
             <div class="order-switch-options">
-              <label><input type="radio" name="order-kind" value="torte" checked><span>Torte</span></label>
+              <label><input type="radio" name="order-kind" value="pasticceria" checked><span>Pasticceria</span></label>
               <label><input type="radio" name="order-kind" value="rosticceria"><span>Rosticceria</span></label>
             </div>
           </fieldset>
-          <form id="order-torte" class="order-form" aria-label="Ordinazione torte">
-            <div class="order-fields">
+          <form id="order-torte" class="order-form" aria-label="Ordinazione pasticceria">
+            <fieldset class="order-group">
+              <legend>Dati per il ritiro</legend>
+              <div class="order-fields">
               <div><label for="torte-surname">Cognome</label><input id="torte-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
               <div><label for="torte-date">Giorno di ritiro</label><input id="torte-date" name="date" type="date" required></div>
-            </div>
+              </div>
+            </fieldset>
             <div class="order-fields">
               <div>
-                <label for="cake-type">Tipo di torta</label>
+                <label for="cake-type">Prodotto</label>
                 <select id="cake-type" name="type" required>
                   <option value="">Seleziona</option>
                   <option>Torta gelato</option>
                   <option>Torta di pasticceria (non gelato)</option>
+                  <option>Mignon</option>
                 </select>
               </div>
-              <div>
+              <div id="cake-format">
                 <label for="cake-size">Formato</label>
                 <select id="cake-size" name="size" aria-describedby="cake-size-help" required>
                   <option value="">Seleziona</option>
@@ -114,40 +119,89 @@
                 </select>
                 <p class="field-help" id="cake-size-help">Il formato determina il peso della torta.</p>
               </div>
+              <div id="mignon-quantity" hidden>
+                <label for="mignon-pieces">Numero di mignon <span class="field-optional">· facoltativo</span></label>
+                <input id="mignon-pieces" name="pieces" type="number" min="1" step="1" inputmode="numeric" disabled>
+              </div>
             </div>
             <div>
               <label for="cake-flavours">Gusti</label>
               <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
             </div>
-            <div>
+            <div id="cake-decoration">
               <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
               <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
             </div>
-            <button class="button primary" type="submit">Continua su WhatsApp</button>
+            <button class="button primary order-submit" type="submit">Continua su WhatsApp</button>
           </form>
           <form id="order-rosticceria" class="order-form" aria-label="Ordinazione rosticceria" hidden>
-            <div class="order-fields">
+            <fieldset class="order-group">
+              <legend>Dati per il ritiro</legend>
+              <div class="order-fields">
               <div><label for="rustici-surname">Cognome</label><input id="rustici-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
               <div><label for="rustici-date">Giorno di ritiro</label><input id="rustici-date" name="date" type="date" required></div>
-            </div>
-            <fieldset class="rustici-options" aria-describedby="rustici-help">
-              <legend>Prodotti</legend>
-              <p class="field-help" id="rustici-help">Seleziona almeno un prodotto.</p>
-              <div class="rustici-grid">
-                <label><input type="checkbox" name="rustico" value="Arancini"><span>Arancini</span></label>
-                <label><input type="checkbox" name="rustico" value="Pizze"><span>Pizze</span></label>
-                <label><input type="checkbox" name="rustico" value="Sfoglie"><span>Sfoglie</span></label>
-                <label><input type="checkbox" name="rustico" value="Strudel"><span>Strudel</span></label>
-                <label><input type="checkbox" name="rustico" value="Cornetti salati"><span>Cornetti salati</span></label>
-                <label><input type="checkbox" name="rustico" value="Pizzoli"><span>Pizzoli</span></label>
               </div>
-              <p class="field-error" id="rustici-error" role="alert" hidden>Seleziona almeno un prodotto per proseguire.</p>
+            </fieldset>
+            <fieldset class="rustici-options" aria-describedby="rustici-help">
+              <legend>Quantità per prodotto</legend>
+              <p class="field-help" id="rustici-help">Usa i pulsanti − e + per scegliere i pezzi.</p>
+              <div class="rustici-grid">
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-arancini">Arancini</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-arancini">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di arancini" data-quantity="Arancini">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-pizze">Pizze</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-pizze">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizze" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di pizze" data-quantity="Pizze">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di pizze">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-sfoglie">Sfoglie</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di sfoglie" data-quantity="Sfoglie">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-strudel">Strudel</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-strudel">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di strudel" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di strudel" data-quantity="Strudel">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di strudel">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-cornetti">Cornetti salati</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-cornetti">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di cornetti salati" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di cornetti salati" data-quantity="Cornetti salati">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di cornetti salati">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-pizzoli">Pizzoli</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di pizzoli" data-quantity="Pizzoli">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli">+</button>
+                  </div>
+                </div>
+              </div>
+              <p class="field-error" id="rustici-error" role="alert" hidden>Aggiungi almeno un pezzo per proseguire.</p>
             </fieldset>
             <div>
-              <label for="rustici-notes">Quantità o preferenze <span class="field-optional">· facoltativo</span></label>
-              <textarea id="rustici-notes" name="notes" maxlength="300" rows="2" placeholder="Ad esempio: 10 arancini e 6 sfoglie"></textarea>
+              <label for="rustici-notes">Preferenze <span class="field-optional">· facoltativo</span></label>
+              <textarea id="rustici-notes" name="notes" maxlength="300" rows="2" placeholder="Ad esempio: arancini al ragù"></textarea>
             </div>
-            <button class="button primary" type="submit">Continua su WhatsApp</button>
+            <button class="button primary order-submit" type="submit">Continua su WhatsApp</button>
           </form>
           <p class="note">Potrai modificare il messaggio prima di inviarlo. <a href="privacy.html">Privacy</a></p>
         </div>
@@ -168,7 +222,7 @@
   <div class="wrap footer-grid">
     <div>
       <p class="footer-name">After Hour Bar</p>
-      <address>Corso Vittorio Emanuele 346<br>96014 Floridia (SR)</address>
+      <address>Corso Vittorio Emanuele 346, all’angolo con Via Roma<br>96014 Floridia (SR)</address>
     </div>
     <div class="footer-actions">
       <a class="button secondary" href="https://www.google.com/maps/dir/?api=1&amp;destination=After%20Hour%20Bar%2C%20Corso%20Vittorio%20Emanuele%20346%2C%2096014%20Floridia" rel="noreferrer">Indicazioni</a>
