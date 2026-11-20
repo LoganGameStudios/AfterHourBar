@@ -93,6 +93,18 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.65rem, 2vw, 1.25rem); margin-top: 1.25rem; }
 .gallery-grid img { display: block; width: 100%; height: auto; border-radius: .35rem; }
 .gallery-grid figcaption { margin-top: .45rem; color: var(--muted); font-size: .88rem; }
+.reviews { background: var(--light); border-top: 1px solid var(--line); }
+.reviews-header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 1.5rem; }
+.reviews-header h2 { text-wrap: balance; }
+.reviews-rating { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .45rem; margin-top: .7rem; color: var(--muted); font-size: .9rem; }
+.reviews-rating strong { color: var(--ink); font-size: 1.1rem; }
+.reviews-star, .reviews-stars { color: #8b5b16; }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: .9rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
+.reviews-grid li { display: grid; padding: clamp(1rem, 3vw, 1.45rem); border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
+.reviews-grid figure { display: grid; align-content: start; grid-template-rows: auto 1fr auto; gap: .65rem; }
+.reviews-stars { font-size: .98rem; letter-spacing: .12em; }
+.reviews-grid blockquote { margin: 0; font-size: 1.03rem; line-height: 1.55; }
+.reviews-grid figcaption { color: var(--muted); font-size: .84rem; font-weight: 800; }
 .site-footer { background: #e8eee1; border-top: 1px solid var(--line); }
 .footer-grid { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 1rem 2rem; padding-block: clamp(1.65rem, 5vw, 3.2rem); }
 .footer-grid address { margin-top: .7rem; font-style: normal; line-height: 1.6; }
