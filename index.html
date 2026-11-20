@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="After Hour Bar a Floridia. Colazioni, pasticceria siciliana e rosticceria in Corso Vittorio Emanuele 346. Orari, telefono e indicazioni.">
+<meta name="description" content="After Hour Bar a Floridia. Colazioni, pasticceria, granite e rosticceria. Torte e rustici su ordinazione. Orari, contatti e indicazioni.">
+<meta name="theme-color" content="#163e39">
 <meta name="referrer" content="no-referrer">
-<meta name="theme-color" content="#13434b">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-01.png">
-<link rel="stylesheet" href="style.css?v=fotografie">
+<link rel="stylesheet" href="style.css?v=ordini">
+<script src="ordini.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Vai al contenuto</a>
@@ -17,9 +18,9 @@
     <a class="brand" href="./"><img src="logo-after-hour-01.png" alt="" width="44" height="44"><span>After Hour Bar<small>Floridia</small></span></a>
     <nav aria-label="Navigazione principale">
       <a href="#banco">Il banco</a>
-      <a href="#ordinazioni">Ordinazioni</a>
       <a href="#titolo-foto">Foto</a>
       <a href="#visita">Orari e contatti</a>
+      <a class="nav-order" href="#ordinazioni">Ordinazioni</a>
     </nav>
   </div>
 </header>
@@ -34,8 +35,11 @@
         <a class="button secondary" href="tel:+390931948599">Chiamaci</a>
       </div>
     </div>
-    <img class="hero-photo" src="bar-granita.jpg" alt="Granita servita in coppa con un lievitato" width="1200" height="675" fetchpriority="high">
+    <figure class="hero-visual">
+      <img src="bar-esterno.jpg" alt="La facciata dell’After Hour Bar sul Corso Vittorio Emanuele" width="1200" height="526" fetchpriority="high">
+    </figure>
   </section>
+
   <section class="visit" id="visita" aria-label="Orari e contatti">
     <dl class="wrap visit-grid">
       <div>
@@ -44,9 +48,9 @@
         <dd>96014 Floridia (SR), vicino a Via Roma</dd>
       </div>
       <div>
-        <dt>Orari indicativi · Lun–dom</dt>
+        <dt>Orari indicativi · Lunedì–domenica</dt>
         <dd><strong>04:30–19:00</strong></dd>
-        <dd>Per gli orari dei festivi, chiama il bar.</dd>
+        <dd>Contattaci per gli orari dei festivi.</dd>
       </div>
       <div>
         <dt>Telefono</dt>
@@ -54,41 +58,53 @@
       </div>
     </dl>
   </section>
-  <section class="wrap counter" id="banco" aria-labelledby="titolo-banco">
-    <div class="menu">
-      <h2 id="titolo-banco">Le specialità del banco</h2>
-      <ul class="offer">
-        <li class="offer-card"><h3>Colazione</h3><p>Espresso, cornetti e lievitati tipici siciliani.</p></li>
-        <li class="offer-card"><h3>Pasticceria</h3><p>Cannoli, raviole alla ricotta e torte su ordinazione.</p></li>
-        <li class="offer-card"><h3>Gelateria</h3><p>Gelati e granite ai gusti mandorla, limone, caffè e cioccolato.</p></li>
-        <li class="offer-card"><h3>Rosticceria</h3><p>Assortimenti di rustici al banco, da asporto e su ordinazione.</p></li>
-      </ul>
-      <p class="note">Per informazioni su allergeni e disponibilità, <a href="tel:+390931948599">chiamaci</a>.</p>
-    </div>
-    <section class="orders" id="ordinazioni" aria-labelledby="titolo-ordinazioni">
+
+  <section class="wrap section-space" id="banco" aria-labelledby="titolo-banco">
+    <h2 id="titolo-banco">Le specialità del banco</h2>
+    <ul class="offer">
+      <li class="offer-card"><h3>Colazione</h3><p>Espresso, cornetti e lievitati tipici siciliani.</p></li>
+      <li class="offer-card"><h3>Pasticceria</h3><p>Cannoli, raviole alla ricotta e torte su ordinazione.</p></li>
+      <li class="offer-card"><h3>Gelateria</h3><p>Gelati e granite di mandorla, limone, caffè e cioccolato.</p></li>
+      <li class="offer-card"><h3>Rosticceria</h3><p>Assortimenti di rustici al banco, da asporto e su ordinazione.</p></li>
+    </ul>
+    <p class="note">Per informazioni su allergeni e disponibilità, <a href="tel:+390931948599">chiamaci</a>.</p>
+  </section>
+
+  <section class="orders section-space" id="ordinazioni" aria-labelledby="titolo-ordinazioni">
+    <div class="wrap orders-grid">
       <div>
-        <h2 id="titolo-ordinazioni">Torte e rustici su ordinazione</h2>
-        <p>Realizziamo torte di diversi tipi per compleanni, cerimonie e altre occasioni. Su richiesta prepariamo anche assortimenti di rustici.</p>
-        <p>Per richiedere disponibilità e prezzi, indica la data, il numero di persone e le tue preferenze. Attendi la conferma del bar prima di considerare l’ordine accettato.</p>
+        <h2 id="titolo-ordinazioni">Torte e rustici<br>su ordinazione</h2>
+        <p class="orders-lead">Prepariamo torte per compleanni, cerimonie e altre occasioni, oltre ad assortimenti di rustici su richiesta.</p>
+        <p>Il bar ti confermerà disponibilità, prezzo e modalità di ritiro.</p>
       </div>
-      <a class="button order-button" href="https://wa.me/393394803273?text=Buongiorno%2C%20vorrei%20informazioni%20per%20un%E2%80%99ordinazione%20di%20torte%20o%20rustici." rel="noreferrer">Ordina su WhatsApp</a>
-    </section>
-    <section class="gallery" aria-labelledby="titolo-foto">
-      <div class="gallery-heading">
-        <h2 id="titolo-foto">Uno sguardo al locale</h2>
-        <p>Corso Vittorio Emanuele 346, Floridia</p>
+      <div class="order-panel">
+        <h3>Prepara la tua richiesta</h3>
+        <form id="order-form" hidden>
+          <label for="order-product">Cosa vuoi ordinare?</label>
+          <select id="order-product" required>
+            <option value="">Seleziona</option>
+            <option value="una torta">Torta</option>
+            <option value="un assortimento di rustici">Rustici</option>
+            <option value="una torta e un assortimento di rustici">Torta e rustici</option>
+          </select>
+          <div class="order-fields">
+            <div><label for="order-date">Data di ritiro</label><input id="order-date" type="date" required></div>
+            <div><label for="order-people">Numero di persone</label><input id="order-people" type="number" min="1" step="1" inputmode="numeric" placeholder="Facoltativo"></div>
+          </div>
+          <button class="button primary" type="submit">Continua su WhatsApp</button>
+          <p class="note">Potrai modificare il messaggio prima di inviarlo.</p>
+        </form>
+        <a id="order-fallback" class="button primary" href="https://wa.me/393394803273" rel="noreferrer">Continua su WhatsApp</a>
       </div>
-      <div class="gallery-grid">
-        <figure>
-          <img src="bar-interno.jpg" alt="Il bancone in legno con la macchina del caffè e le vetrine" width="1200" height="675" loading="lazy">
-          <figcaption>Il bancone</figcaption>
-        </figure>
-        <figure>
-          <img src="bar-caffe.jpg" alt="Un caffè in tazzina di vetro, con il banco sullo sfondo" width="945" height="1680" loading="lazy">
-          <figcaption>Il caffè</figcaption>
-        </figure>
-      </div>
-    </section>
+    </div>
+  </section>
+
+  <section class="wrap section-space gallery" aria-labelledby="titolo-foto">
+    <h2 id="titolo-foto">Dal locale</h2>
+    <div class="gallery-grid">
+      <figure><img src="bar-interno.jpg" alt="Il bancone in legno con la macchina del caffè e le vetrine" width="1200" height="675" loading="lazy"><figcaption>Il bancone</figcaption></figure>
+      <figure><img src="bar-granita.jpg" alt="Granita in coppa accompagnata da un lievitato" width="1200" height="675" loading="lazy"><figcaption>Granita e lievitati</figcaption></figure>
+    </div>
   </section>
 </main>
 <footer class="site-footer">
