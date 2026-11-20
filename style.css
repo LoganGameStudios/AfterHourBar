@@ -116,7 +116,6 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
   .visit-grid > div:nth-child(2) { border-left: 0; padding-left: 0; }
 }
 @media (max-width: 370px) {
-  .order-fields { grid-template-columns: 1fr; }
 }
 
 .order-form { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr); align-items: start; gap: 1rem clamp(1rem, 3.5vw, 2.5rem); margin-top: 1.25rem; }
@@ -196,10 +195,6 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .rustici-recap ul { display: grid; gap: .28rem; margin: .55rem 0 0; padding: .45rem 0 0; list-style: none; border-top: 1px solid #cadcc6; font-size: .85rem; }
 .rustici-recap strong { white-space: nowrap; }
 
-@media (max-width: 760px) {
-  .order-form { grid-template-columns: 1fr; }
-}
-
 .mignon-preferences, .mignon-choice { min-width: 0; margin: 0; padding: 0; border: 0; }
 .mignon-preferences { padding: .8rem; border: 1px solid var(--line); border-radius: .7rem; background: #f5f8f0; }
 .mignon-preferences > legend { padding: 0 .4rem; color: var(--accent); font-weight: 800; font-size: .95rem; }
@@ -232,3 +227,36 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 
 .pastry-add { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem .8rem; }
 .pastry-add .field-help { margin: 0; }
+.pastry-add .field-help:empty { position: absolute; }
+.order-shortcut { display: none; }
+
+@media (max-width: 760px) {
+  .orders-layout { width: min(calc(100% - 1.25rem), 73rem); }
+  .orders-intro { padding-inline: .5rem; }
+  .order-panel { padding: clamp(.75rem, 3vw, 1.2rem); }
+  .order-form { grid-template-columns: minmax(0, 1fr); }
+  .order-switch { max-width: none; }
+  .order-switch-options span { display: grid; align-items: center; min-height: 2.75rem; }
+  .order-form input:not([type="checkbox"]), .order-form select, .order-form textarea { font-size: 1rem; min-height: 3rem; }
+  .order-form :is(input, select, textarea, button, summary) { scroll-margin-block: 1rem 5rem; }
+  .quantity-row, .quantity-group summary { padding-inline: .65rem; }
+  .quantity-group-items { padding-inline: .65rem; }
+  .quantity-group-items .quantity-row { padding-inline: 0; }
+  .quantity-name { overflow-wrap: anywhere; }
+  .quantity-stepper { grid-template-columns: 2.75rem minmax(2ch, auto) 2.75rem; gap: .3rem; }
+  .quantity-stepper button { padding: 0; }
+  .quantity-stepper button, .recap-remove { touch-action: manipulation; }
+  .mignon-choice label, .recap-remove { min-height: 2.75rem; }
+  .pastry-add .button { width: 100%; min-height: 3rem; border-radius: .7rem; }
+  .order-form .order-submit { min-height: 3.15rem; }
+  .order-shortcut { position: sticky; z-index: 1; bottom: env(safe-area-inset-bottom, 0px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .3rem .65rem; padding: .35rem .4rem .35rem .7rem; border: 1px solid #cadcc6; border-radius: .75rem; background: var(--light); box-shadow: 0 .3rem 1rem #203d2630; }
+  .order-shortcut > span { font-size: .875rem; font-weight: 800; }
+  .order-shortcut .button { gap: .4rem; border-radius: .55rem; }
+  .order-selection:has(:is(input[type="text"], textarea):focus) .order-shortcut { position: static; }
+  #order-recap { scroll-margin-top: .75rem; }
+}
+
+@media (max-width: 480px) {
+  .order-fields { grid-template-columns: minmax(0, 1fr); }
+  .rustici-recap { padding-inline: .65rem; }
+}

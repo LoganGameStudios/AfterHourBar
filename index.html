@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=icone-sopra">
-<script src="ordini.js?v=18" defer></script>
+<link rel="stylesheet" href="style.css?v=ordini-mobile">
+<script src="ordini.js?v=19" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -104,7 +104,7 @@
                       <option>Mignon</option>
                     </select>
                   </div>
-                  <div id="cake-format">
+                  <div id="cake-format" hidden>
                     <label for="cake-size">Formato</label>
                     <select id="cake-size" name="size" aria-describedby="cake-size-help" required>
                       <option value="">Seleziona</option>
@@ -184,7 +184,7 @@
                   <label for="mignon-notes">Altre preferenze <span class="field-optional">· facoltativo</span></label>
                   <input id="mignon-notes" name="mignonNotes" type="text" maxlength="160" placeholder="Indica eventuali altri tipi o gusti">
                 </fieldset>
-                <div id="cake-flavours-field">
+                <div id="cake-flavours-field" hidden>
                   <label for="cake-flavours">Gusti</label>
                   <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
                 </div>
@@ -196,7 +196,7 @@
                     <option>Glassa al cioccolato</option>
                   </select>
                 </div>
-                <div id="cake-decoration">
+                <div id="cake-decoration" hidden>
                   <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
                   <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
                 </div>
@@ -355,20 +355,13 @@
                   </div>
                 </div>
               </fieldset>
+              <div class="order-shortcut" id="order-shortcut" hidden>
+                <span id="order-shortcut-count"></span>
+                <button class="button primary" id="show-order-recap" type="button">Vedi riepilogo <span aria-hidden="true">↓</span></button>
+              </div>
             </div>
             <div class="order-side">
-              <fieldset class="order-group">
-                <legend>Dati per il ritiro</legend>
-                <div class="order-fields">
-                  <div><label for="order-surname">Cognome</label><input id="order-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
-                  <div><label for="order-date">Giorno di ritiro</label><input id="order-date" name="date" type="date" required></div>
-                </div>
-              </fieldset>
-              <div id="rustici-notes-field" hidden>
-                <label for="rustici-notes">Preferenze <span class="field-optional">· facoltativo</span></label>
-                <textarea id="rustici-notes" name="notes" disabled maxlength="300" rows="2" placeholder="Ad esempio: confezioni separate"></textarea>
-              </div>
-              <section class="rustici-recap" id="order-recap" aria-labelledby="order-recap-title" hidden>
+              <section class="rustici-recap" id="order-recap" aria-labelledby="order-recap-title" tabindex="-1" hidden>
                 <div class="recap-heading"><h4 id="order-recap-title">Riepilogo dell’ordine</h4></div>
                 <div id="pastry-recap" hidden>
                   <h5>Pasticceria</h5>
@@ -382,6 +375,17 @@
                   <ul id="rustici-recap-items"></ul>
                 </div>
               </section>
+              <fieldset class="order-group">
+                <legend>Dati per il ritiro</legend>
+                <div class="order-fields">
+                  <div><label for="order-surname">Cognome</label><input id="order-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
+                  <div><label for="order-date">Giorno di ritiro</label><input id="order-date" name="date" type="date" required></div>
+                </div>
+              </fieldset>
+              <div id="rustici-notes-field" hidden>
+                <label for="rustici-notes">Preferenze <span class="field-optional">· facoltativo</span></label>
+                <textarea id="rustici-notes" name="notes" disabled maxlength="300" rows="2" placeholder="Ad esempio: confezioni separate"></textarea>
+              </div>
               <p class="field-error" id="order-empty-error" role="alert" hidden>Aggiungi almeno un articolo al riepilogo per proseguire.</p>
               <button class="button primary order-submit" type="submit" aria-describedby="order-note">Continua su WhatsApp</button>
               <p class="note order-note" id="order-note">L’invio della richiesta non ti impegna all’acquisto. Potrai modificare il messaggio prima di inviarlo. <a href="privacy.html">Privacy</a></p>

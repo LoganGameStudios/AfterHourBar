@@ -8,6 +8,8 @@ const pastry = document.querySelector("#order-torte");
 const savoury = document.querySelector("#order-rosticceria");
 const savouryNotes = document.querySelector("#rustici-notes-field");
 const orderRecap = document.querySelector("#order-recap");
+const orderShortcut = document.querySelector("#order-shortcut");
+const orderShortcutCount = document.querySelector("#order-shortcut-count");
 const emptyOrderError = document.querySelector("#order-empty-error");
 const pastryRecap = document.querySelector("#pastry-recap");
 const pastryRecapItems = document.querySelector("#pastry-recap-items");
@@ -81,20 +83,21 @@ mignonPreferences.addEventListener("change", updateMignonChoices);
 updateMignonChoices();
 
 function updatePastryOptions() {
+  const isCake = orderFields.type.value.startsWith("Torta ");
   const isMignon = orderFields.type.value === "Mignon";
   const isClassic = orderFields.type.value === "Torta classica";
   cakeTopping.hidden = !isClassic;
   orderFields.topping.disabled = !isClassic;
-  cakeFormat.hidden = isMignon;
-  cakeDecoration.hidden = isMignon;
-  orderFields.size.disabled = isMignon;
-  orderFields.inscription.disabled = isMignon;
+  cakeFormat.hidden = !isCake;
+  cakeDecoration.hidden = !isCake;
+  orderFields.size.disabled = !isCake;
+  orderFields.inscription.disabled = !isCake;
   mignonWeight.hidden = !isMignon;
   orderFields.weight.disabled = !isMignon;
   mignonPreferences.hidden = !isMignon;
   mignonPreferences.disabled = !isMignon;
-  cakeFlavours.hidden = isMignon;
-  orderFields.flavours.disabled = isMignon;
+  cakeFlavours.hidden = !isCake;
+  orderFields.flavours.disabled = !isCake;
 }
 
 orderFields.type.addEventListener("change", updatePastryOptions);
@@ -255,6 +258,9 @@ function updateOrderRecap() {
   const hasPastry = pastryItems.length > 0;
   const hasSavoury = total > 0;
   orderRecap.hidden = !hasPastry && !hasSavoury;
+  orderShortcut.hidden = orderRecap.hidden;
+  const entries = pastryItems.length + selected.length;
+  orderShortcutCount.textContent = `${entries} ${entries === 1 ? "voce" : "voci"}`;
   if (!orderRecap.hidden) emptyOrderError.hidden = true;
   pastryRecap.hidden = !hasPastry;
   rusticiRecap.hidden = !hasSavoury;
@@ -281,6 +287,11 @@ function updateOrderRecap() {
     restoreFocus() { focusProduct(product); }
   })));
 }
+
+document.querySelector("#show-order-recap").addEventListener("click", () => {
+  orderRecap.focus({ preventScroll: true });
+  orderRecap.scrollIntoView({ block: "start" });
+});
 
 orderForm.addEventListener("submit", (event) => {
   event.preventDefault();
