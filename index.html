@@ -146,11 +146,35 @@
               <p class="field-help" id="rustici-help">Usa i pulsanti − e + per scegliere i pezzi.</p>
               <div class="rustici-grid">
                 <div class="quantity-row">
-                  <span class="quantity-name" id="product-arancini">Arancini</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-arancini">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di arancini" data-quantity="Arancini">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini">+</button>
+                  <span class="quantity-name" id="product-arancini-al-forno">Arancini al forno</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-forno">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al forno" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di arancini al forno" data-quantity="Arancini al forno">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al forno">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-arancini-al-ragu">Arancini al ragù</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-ragu">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al ragù" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di arancini al ragù" data-quantity="Arancini al ragù">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al ragù">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-arancini-con-spinaci">Arancini con spinaci</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-con-spinaci">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini con spinaci" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di arancini con spinaci" data-quantity="Arancini con spinaci">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini con spinaci">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-cornetti">Cornetti salati</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-cornetti">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di cornetti salati" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di cornetti salati" data-quantity="Cornetti salati">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di cornetti salati">+</button>
                   </div>
                 </div>
                 <div class="quantity-row">
@@ -159,6 +183,14 @@
                     <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizze" aria-disabled="true">−</button>
                     <output aria-label="Quantità di pizze" data-quantity="Pizze">0</output>
                     <button type="button" data-step="1" aria-label="Aumenta la quantità di pizze">+</button>
+                  </div>
+                </div>
+                <div class="quantity-row">
+                  <span class="quantity-name" id="product-pizzoli">Pizzoli</span>
+                  <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli">
+                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli" aria-disabled="true">−</button>
+                    <output aria-label="Quantità di pizzoli" data-quantity="Pizzoli">0</output>
+                    <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli">+</button>
                   </div>
                 </div>
                 <div class="quantity-row">
@@ -177,28 +209,12 @@
                     <button type="button" data-step="1" aria-label="Aumenta la quantità di strudel">+</button>
                   </div>
                 </div>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-cornetti">Cornetti salati</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-cornetti">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di cornetti salati" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di cornetti salati" data-quantity="Cornetti salati">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di cornetti salati">+</button>
-                  </div>
-                </div>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-pizzoli">Pizzoli</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di pizzoli" data-quantity="Pizzoli">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli">+</button>
-                  </div>
-                </div>
               </div>
               <p class="field-error" id="rustici-error" role="alert" hidden>Aggiungi almeno un pezzo per proseguire.</p>
             </fieldset>
             <div>
               <label for="rustici-notes">Preferenze <span class="field-optional">· facoltativo</span></label>
-              <textarea id="rustici-notes" name="notes" maxlength="300" rows="2" placeholder="Ad esempio: arancini al ragù"></textarea>
+              <textarea id="rustici-notes" name="notes" maxlength="300" rows="2" placeholder="Ad esempio: confezioni separate"></textarea>
             </div>
             <button class="button primary order-submit" type="submit">Continua su WhatsApp</button>
           </form>
