@@ -8,9 +8,9 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=slider-recensioni">
+<link rel="stylesheet" href="style.css?v=recensioni-touch">
 <script src="ordini.js?v=19" defer></script>
-<script src="effetti.js?v=2" defer></script>
+<script src="effetti.js?v=3" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Vai al contenuto</a>
@@ -415,10 +415,6 @@
         </div>
         <a class="button primary" href="https://www.google.com/maps/place//data=!4m4!3m3!1s0x1313d3dfac6e0881:0x2f46b0cf2dad206e!9m1!1b1?hl=it" rel="noreferrer">Leggi tutte le recensioni su Google Maps</a>
       </div>
-      <div class="reviews-controls" hidden>
-        <button type="button" data-review-step="-1" aria-label="Recensione precedente" aria-controls="reviews-slider"><span aria-hidden="true">←</span></button>
-        <button type="button" data-review-step="1" aria-label="Recensione successiva" aria-controls="reviews-slider"><span aria-hidden="true">→</span></button>
-      </div>
       <ul class="reviews-slider" id="reviews-slider" role="list" aria-label="Estratti delle recensioni" tabindex="0">
         <li>
           <figure>
@@ -456,6 +452,11 @@
           </figure>
         </li>
       </ul>
+      <div class="reviews-controls" role="group" aria-label="Navigazione delle recensioni" hidden>
+        <button class="reviews-arrow" type="button" data-review-step="-1" aria-label="Recensione precedente" aria-controls="reviews-slider"><span aria-hidden="true">←</span></button>
+        <div class="reviews-dots"></div>
+        <button class="reviews-arrow" type="button" data-review-step="1" aria-label="Recensione successiva" aria-controls="reviews-slider"><span aria-hidden="true">→</span></button>
+      </div>
     </div>
   </section>
 </main>
