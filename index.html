@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=ordine-unico">
-<script src="ordini.js?v=15" defer></script>
+<link rel="stylesheet" href="style.css?v=riepilogo-condiviso">
+<script src="ordini.js?v=16" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -88,10 +88,9 @@
             <div class="order-switch-options">
               <label><input type="radio" name="order-kind" value="pasticceria" checked><span>Pasticceria</span></label>
               <label><input type="radio" name="order-kind" value="rosticceria"><span>Rosticceria</span></label>
-              <label><input type="radio" name="order-kind" value="entrambi"><span>Entrambi</span></label>
             </div>
           </fieldset>
-          <form id="order-form" class="order-form" aria-label="Richiesta di ordinazione">
+          <form id="order-form" class="order-form" aria-label="Richiesta di ordinazione" novalidate
             <div class="order-selection">
               <fieldset id="order-torte" class="order-group order-products">
                 <legend>Pasticceria</legend>
@@ -200,6 +199,10 @@
                 <div id="cake-decoration">
                   <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
                   <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
+                </div>
+                <div class="pastry-add">
+                  <button class="button secondary" id="add-pastry" type="button">Aggiungi al riepilogo</button>
+                  <p class="field-help" id="pastry-status" role="status"></p>
                 </div>
               </fieldset>
               <fieldset id="order-rosticceria" class="rustici-options order-products" hidden disabled aria-describedby="rustici-help">
@@ -351,7 +354,6 @@
                     </div>
                   </div>
                 </div>
-                <p class="field-error" id="rustici-error" role="alert" hidden>Aggiungi almeno un pezzo per proseguire.</p>
               </fieldset>
             </div>
             <div class="order-side">
@@ -366,13 +368,21 @@
                 <label for="rustici-notes">Preferenze <span class="field-optional">· facoltativo</span></label>
                 <textarea id="rustici-notes" name="notes" disabled maxlength="300" rows="2" placeholder="Ad esempio: confezioni separate"></textarea>
               </div>
-              <section class="rustici-recap" id="rustici-recap" aria-labelledby="rustici-recap-title" hidden>
-                <div class="recap-heading">
-                  <h4 id="rustici-recap-title">Riepilogo rosticceria</h4>
-                  <span id="rustici-recap-total"></span>
+              <section class="rustici-recap" id="order-recap" aria-labelledby="order-recap-title" hidden>
+                <div class="recap-heading"><h4 id="order-recap-title">Riepilogo dell’ordine</h4></div>
+                <div id="pastry-recap" hidden>
+                  <h5>Pasticceria</h5>
+                  <ul id="pastry-recap-items"></ul>
                 </div>
-                <ul id="rustici-recap-items"></ul>
+                <div id="rustici-recap" hidden>
+                  <div class="recap-heading">
+                    <h5>Rosticceria</h5>
+                    <span id="rustici-recap-total"></span>
+                  </div>
+                  <ul id="rustici-recap-items"></ul>
+                </div>
               </section>
+              <p class="field-error" id="order-empty-error" role="alert" hidden>Aggiungi almeno un articolo al riepilogo per proseguire.</p>
               <button class="button primary order-submit" type="submit" aria-describedby="order-note">Continua su WhatsApp</button>
               <p class="note order-note" id="order-note">L’invio della richiesta non ti impegna all’acquisto. Potrai modificare il messaggio prima di inviarlo. <a href="privacy.html">Privacy</a></p>
             </div>

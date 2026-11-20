@@ -130,7 +130,7 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .order-switch, .order-group, .rustici-options { min-width: 0; border: 0; margin: 0; padding: 0; }
 .order-switch legend, .order-group legend, .rustici-options legend { padding: 0; font-weight: 800; font-size: .98rem; }
 .order-switch { max-width: 32rem; }
-.order-switch-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .35rem; margin-top: .6rem; padding: .25rem; border-radius: .75rem; background: var(--light); }
+.order-switch-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem; margin-top: .6rem; padding: .25rem; border-radius: .75rem; background: var(--light); }
 .order-switch-options label { position: relative; }
 .order-switch-options input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .order-switch-options span { display: block; padding: .62rem .4rem; text-align: center; font-size: .89rem; font-weight: 800; border-radius: .55rem; cursor: pointer; }
@@ -223,3 +223,11 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 
 .order-panel .order-note { margin-top: 0; }
 #order-fallback[hidden] + .order-fallback-note { display: none; }
+
+.pastry-add { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem .8rem; }
+.pastry-add .field-help { margin: 0; }
+.rustici-recap h5 { margin: .65rem 0 0; color: var(--accent); font-size: .86rem; }
+.rustici-recap ul { margin-top: .35rem; }
+.recap-product { min-width: 0; }
+.recap-product strong, .recap-product small { display: block; white-space: normal; overflow-wrap: anywhere; }
+.recap-product small { margin-top: .2rem; color: var(--muted); font-size: .78rem; }

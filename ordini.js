@@ -7,7 +7,13 @@ const orderFields = orderForm.elements;
 const pastry = document.querySelector("#order-torte");
 const savoury = document.querySelector("#order-rosticceria");
 const savouryNotes = document.querySelector("#rustici-notes-field");
-const rusticiError = document.querySelector("#rustici-error");
+const orderRecap = document.querySelector("#order-recap");
+const emptyOrderError = document.querySelector("#order-empty-error");
+const pastryRecap = document.querySelector("#pastry-recap");
+const pastryRecapItems = document.querySelector("#pastry-recap-items");
+const addPastry = document.querySelector("#add-pastry");
+const pastryStatus = document.querySelector("#pastry-status");
+const pastryItems = [];
 const rusticiRecap = document.querySelector("#rustici-recap");
 const rusticiRecapItems = document.querySelector("#rustici-recap-items");
 const rusticiRecapTotal = document.querySelector("#rustici-recap-total");
@@ -25,7 +31,7 @@ function sendRequest(details) {
   const fields = orderFields;
   fields.date.min = todayInItaly();
   fields.surname.value = fields.surname.value.trim();
-  if (!orderForm.reportValidity()) return;
+  if (!fields.surname.reportValidity() || !fields.date.reportValidity()) return;
 
   const date = dayFormat.format(new Date(`${fields.date.value}T00:00:00Z`));
   const message = [
@@ -49,9 +55,7 @@ function showSelectedForm() {
   pastry.disabled = pastry.hidden;
   savoury.hidden = kind === "pasticceria";
   savoury.disabled = savoury.hidden;
-  savouryNotes.hidden = savoury.hidden;
-  orderFields.notes.disabled = savoury.hidden;
-  updateRusticiRecap();
+  updateOrderRecap();
 }
 
 const cakeFormat = document.querySelector("#cake-format");
@@ -98,7 +102,7 @@ updatePastryOptions();
 
 function pastryDetails() {
   const fields = orderFields;
-  const details = [`Prodotto: ${fields.type.value}`];
+  const details = [];
 
   if (fields.type.value === "Mignon") {
     const grams = Number(fields.weight.value);
@@ -120,8 +124,34 @@ function pastryDetails() {
     const inscription = fields.inscription.value.trim();
     if (inscription) details.push(`Scritta sulla torta: ${inscription}`);
   }
-  return details;
+  return { name: fields.type.value, details };
 }
+
+addPastry.addEventListener("click", () => {
+  const fields = [...pastry.querySelectorAll("input, select")];
+  orderFields.flavours.value = orderFields.flavours.value.trim();
+  if (!fields.every((field) => field.reportValidity())) return;
+
+  const entry = pastryDetails();
+  pastryItems.push(entry);
+  pastryStatus.textContent = `${entry.name} aggiunto al riepilogo.`;
+
+  for (const field of fields) {
+    if (field.type === "checkbox") field.checked = false;
+    else field.value = "";
+  }
+  updatePastryOptions();
+  updateMignonChoices();
+  updateOrderRecap();
+});
+
+pastry.addEventListener("change", () => { pastryStatus.textContent = ""; });
+pastry.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && event.target.matches('input[type="text"]')) {
+    event.preventDefault();
+    addPastry.click();
+  }
+});
 
 const products = [...savoury.querySelectorAll(".quantity-row")].map((row) => {
   const product = {
@@ -147,19 +177,26 @@ function setProductQuantity({ row, quantity, decrease, group }, next) {
   quantity.value = String(next);
   decrease.setAttribute("aria-disabled", String(next === 0));
   row.toggleAttribute("data-selected", next > 0);
-  if (next > 0) rusticiError.hidden = true;
 
   if (group) {
     const quantities = [...group.querySelectorAll("[data-quantity]")];
     const total = quantities.reduce((sum, item) => sum + Number(item.value), 0);
     group.querySelector(".quantity-total").textContent = total ? `${total} ${total === 1 ? "pezzo" : "pezzi"}` : `${quantities.length} varietà`;
   }
-  updateRusticiRecap();
+  updateOrderRecap();
 }
 
 function focusProduct({ increase }) {
+  if (savoury.hidden) {
+    focusOrderChoice();
+    return;
+  }
   const summary = increase.closest("details:not([open])")?.querySelector("summary");
   (summary ?? increase).focus();
+}
+
+function focusOrderChoice() {
+  orderSwitch.querySelector("input:checked").focus();
 }
 
 function selectedRustici() {
@@ -172,56 +209,101 @@ function selectedRustici() {
     .filter(({ pieces }) => pieces > 0);
 }
 
-function updateRusticiRecap() {
-  const selected = selectedRustici();
-  const total = selected.reduce((sum, item) => sum + item.pieces, 0);
-  rusticiRecap.hidden = savoury.hidden || total === 0;
-  rusticiRecapTotal.textContent = `${total} ${total === 1 ? "pezzo" : "pezzi"}`;
-  rusticiRecapItems.replaceChildren(...selected.map(({ product, name, pieces }, index) => {
+function renderRecapItems(list, entries) {
+  list.replaceChildren(...entries.map(({ name, detail, pieces, removeItem, restoreFocus }, index) => {
     const item = document.createElement("li");
-    const label = document.createElement("span");
+    const label = document.createElement("div");
+    label.className = "recap-product";
+    if (detail) {
+      const title = document.createElement("strong");
+      const description = document.createElement("small");
+      title.textContent = name;
+      description.textContent = detail;
+      label.append(title, description);
+    } else {
+      label.textContent = name;
+    }
+
     const actions = document.createElement("div");
-    const quantity = document.createElement("strong");
-    const remove = document.createElement("button");
-    label.textContent = name;
     actions.className = "recap-actions";
-    quantity.textContent = `× ${pieces}`;
+    if (pieces) {
+      const quantity = document.createElement("strong");
+      quantity.textContent = `× ${pieces}`;
+      actions.append(quantity);
+    }
+    const remove = document.createElement("button");
     remove.type = "button";
     remove.className = "recap-remove";
     remove.textContent = "Rimuovi";
     remove.setAttribute("aria-label", `Rimuovi ${name} dal riepilogo`);
     remove.addEventListener("click", () => {
-      setProductQuantity(product, 0);
-      const buttons = rusticiRecapItems.querySelectorAll(".recap-remove");
+      removeItem();
+      const buttons = list.querySelectorAll(".recap-remove");
       const nextButton = buttons[index] ?? buttons[index - 1];
       if (nextButton) nextButton.focus();
-      else focusProduct(product);
+      else restoreFocus();
     });
-    actions.append(quantity, remove);
+    actions.append(remove);
     item.append(label, actions);
     return item;
   }));
 }
 
+function updateOrderRecap() {
+  const selected = selectedRustici();
+  const total = selected.reduce((sum, item) => sum + item.pieces, 0);
+  const hasPastry = pastryItems.length > 0;
+  const hasSavoury = total > 0;
+  orderRecap.hidden = !hasPastry && !hasSavoury;
+  if (!orderRecap.hidden) emptyOrderError.hidden = true;
+  pastryRecap.hidden = !hasPastry;
+  rusticiRecap.hidden = !hasSavoury;
+  savouryNotes.hidden = savoury.hidden && !hasSavoury;
+  orderFields.notes.disabled = savouryNotes.hidden;
+  rusticiRecapTotal.textContent = `${total} ${total === 1 ? "pezzo" : "pezzi"}`;
+
+  renderRecapItems(pastryRecapItems, pastryItems.map(({ name, details }, index) => ({
+    name,
+    detail: details.map((line) => line.replace(/^- /, "")).join(" · "),
+    removeItem() {
+      pastryItems.splice(index, 1);
+      updateOrderRecap();
+    },
+    restoreFocus() {
+      if (pastry.hidden) focusOrderChoice();
+      else orderFields.type.focus();
+    }
+  })));
+  renderRecapItems(rusticiRecapItems, selected.map(({ product, name, pieces }) => ({
+    name,
+    pieces,
+    removeItem() { setProductQuantity(product, 0); },
+    restoreFocus() { focusProduct(product); }
+  })));
+}
+
 orderForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  const selected = selectedRustici();
+  if (!pastryItems.length && !selected.length) {
+    emptyOrderError.hidden = false;
+    focusOrderChoice();
+    return;
+  }
+
   const details = [];
-
-  if (!savoury.hidden) {
-    const selected = selectedRustici();
-    rusticiError.hidden = selected.length > 0;
-    if (!selected.length) {
-      focusProduct(products[0]);
-      return;
+  if (pastryItems.length) {
+    details.push("Pasticceria:");
+    for (const { name, details: options } of pastryItems) {
+      details.push(`Prodotto: ${name}`, ...options, "");
     }
-
-    if (!pastry.hidden) details.push("Pasticceria:", ...pastryDetails(), "");
+  }
+  if (selected.length) {
     details.push("Rosticceria:", ...selected.map(({ name, pieces }) => `- ${name}: ${pieces} ${pieces === 1 ? "pezzo" : "pezzi"}`));
     const notes = orderFields.notes.value.trim();
     if (notes) details.push(`Preferenze: ${notes}`);
-  } else {
-    details.push(...pastryDetails());
   }
+
   sendRequest(details);
 });
 
