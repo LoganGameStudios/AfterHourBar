@@ -52,6 +52,7 @@ const cakeFormat = document.querySelector("#cake-format");
 const cakeDecoration = document.querySelector("#cake-decoration");
 const cakeTopping = document.querySelector("#cake-topping-field");
 const mignonWeight = document.querySelector("#mignon-weight-field");
+const mignonCustomWeight = document.querySelector("#mignon-custom-field");
 
 function updatePastryOptions() {
   const isMignon = cakeFields.type.value === "Mignon";
@@ -64,9 +65,13 @@ function updatePastryOptions() {
   cakeFields.inscription.disabled = isMignon;
   mignonWeight.hidden = !isMignon;
   cakeFields.weight.disabled = !isMignon;
+  const showCustomWeight = isMignon && cakeFields.weight.value === "altro";
+  mignonCustomWeight.hidden = !showCustomWeight;
+  cakeFields.customWeight.disabled = !showCustomWeight;
 }
 
 cakeFields.type.addEventListener("change", updatePastryOptions);
+cakeFields.weight.addEventListener("change", updatePastryOptions);
 updatePastryOptions();
 
 cakeForm.addEventListener("submit", (event) => {
@@ -76,7 +81,8 @@ cakeForm.addEventListener("submit", (event) => {
   const details = [`Prodotto: ${fields.type.value}`, `Gusti: ${fields.flavours.value}`];
 
   if (fields.type.value === "Mignon") {
-    details.push(`Peso: ${fields.weight.valueAsNumber} g`);
+    const grams = fields.weight.value === "altro" ? fields.customWeight.valueAsNumber : Number(fields.weight.value);
+    details.push(`Peso: ${grams} g`);
   } else {
     details.push(`Formato: ${fields.size.value}`);
     if (!fields.topping.disabled && fields.topping.value) {
