@@ -185,30 +185,102 @@
                     <button type="button" data-step="1" aria-label="Aumenta la quantità di cornetti salati">+</button>
                   </div>
                 </div>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-pizze">Pizze</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-pizze">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizze" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di pizze" data-quantity="Pizze">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di pizze">+</button>
+                <details class="quantity-group">
+                  <summary>
+                    <span class="quantity-name">Pizze</span>
+                    <span class="quantity-total">3 varietà</span>
+                  </summary>
+                  <div class="quantity-group-items">
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-pizze-capricciosa">Capricciosa</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-capricciosa">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza capricciosa" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di pizza capricciosa" data-quantity="Pizza capricciosa">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza capricciosa">+</button>
+                      </div>
+                    </div>
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-pizze-margherita">Margherita</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-margherita">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza margherita" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di pizza margherita" data-quantity="Pizza margherita">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza margherita">+</button>
+                      </div>
+                    </div>
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-pizze-prosciutto-cotto">Prosciutto cotto</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-prosciutto-cotto">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza con prosciutto cotto" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di pizza con prosciutto cotto" data-quantity="Pizza con prosciutto cotto">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza con prosciutto cotto">+</button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-pizzoli">Pizzoli</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di pizzoli" data-quantity="Pizzoli">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli">+</button>
+                </details>
+                <details class="quantity-group">
+                  <summary>
+                    <span class="quantity-name">Pizzoli</span>
+                    <span class="quantity-total">3 varietà</span>
+                  </summary>
+                  <div class="quantity-group-items">
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-pizzoli-prosciutto">Prosciutto</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-prosciutto">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli con prosciutto" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di pizzoli con prosciutto" data-quantity="Pizzoli con prosciutto">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli con prosciutto">+</button>
+                      </div>
+                    </div>
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-pizzoli-salame-piccante">Salame piccante</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-salame-piccante">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli al salame piccante" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di pizzoli al salame piccante" data-quantity="Pizzoli al salame piccante">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli al salame piccante">+</button>
+                      </div>
+                    </div>
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-pizzoli-spinaci">Spinaci</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-spinaci">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli con spinaci" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di pizzoli con spinaci" data-quantity="Pizzoli con spinaci">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli con spinaci">+</button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-sfoglie">Sfoglie</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di sfoglie" data-quantity="Sfoglie">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie">+</button>
+                </details>
+                <details class="quantity-group">
+                  <summary>
+                    <span class="quantity-name">Sfoglie</span>
+                    <span class="quantity-total">3 varietà</span>
+                  </summary>
+                  <div class="quantity-group-items">
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-sfoglie-prosciutto">Prosciutto</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-prosciutto">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con prosciutto" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di sfoglie con prosciutto" data-quantity="Sfoglie con prosciutto">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con prosciutto">+</button>
+                      </div>
+                    </div>
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-sfoglie-spinaci">Spinaci</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-spinaci">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con spinaci" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di sfoglie con spinaci" data-quantity="Sfoglie con spinaci">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con spinaci">+</button>
+                      </div>
+                    </div>
+                    <div class="quantity-row">
+                      <span class="quantity-name" id="product-sfoglie-wurstel">Würstel</span>
+                      <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-wurstel">
+                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con würstel" aria-disabled="true">−</button>
+                        <output aria-label="Quantità di sfoglie con würstel" data-quantity="Sfoglie con würstel">0</output>
+                        <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con würstel">+</button>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </details>
                 <div class="quantity-row">
                   <span class="quantity-name" id="product-strudel">Strudel</span>
                   <div class="quantity-stepper" role="group" aria-labelledby="product-strudel">
