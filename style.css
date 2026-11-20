@@ -219,3 +219,6 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .recap-actions { display: flex; align-items: center; flex: 0 0 auto; gap: clamp(.25rem, 1vw, .55rem); }
 .recap-remove { min-height: 2.5rem; padding: .2rem .48rem; border: 1px solid #abc4a9; border-radius: .45rem; color: var(--accent); background: var(--card); font: 750 .8rem/1.2 var(--type); cursor: pointer; }
 .recap-remove:hover { border-color: var(--accent); background: #e2ecdf; }
+
+.order-panel .order-note { margin-top: 0; }
+#order-fallback[hidden] + .order-fallback-note { display: none; }
