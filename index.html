@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=riepilogo-condiviso">
-<script src="ordini.js?v=16" defer></script>
+<link rel="stylesheet" href="style.css?v=riepilogo-auto">
+<script src="ordini.js?v=17" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -90,7 +90,7 @@
               <label><input type="radio" name="order-kind" value="rosticceria"><span>Rosticceria</span></label>
             </div>
           </fieldset>
-          <form id="order-form" class="order-form" aria-label="Richiesta di ordinazione" novalidate
+          <form id="order-form" class="order-form" aria-label="Richiesta di ordinazione" novalidate>
             <div class="order-selection">
               <fieldset id="order-torte" class="order-group order-products">
                 <legend>Pasticceria</legend>
@@ -200,10 +200,7 @@
                   <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
                   <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
                 </div>
-                <div class="pastry-add">
-                  <button class="button secondary" id="add-pastry" type="button">Aggiungi al riepilogo</button>
-                  <p class="field-help" id="pastry-status" role="status"></p>
-                </div>
+                <p class="field-help">Il prodotto compare nel riepilogo quando completi i campi obbligatori.</p>
               </fieldset>
               <fieldset id="order-rosticceria" class="rustici-options order-products" hidden disabled aria-describedby="rustici-help">
                 <legend>Rosticceria</legend>

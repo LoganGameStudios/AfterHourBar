@@ -224,8 +224,6 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .order-panel .order-note { margin-top: 0; }
 #order-fallback[hidden] + .order-fallback-note { display: none; }
 
-.pastry-add { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem .8rem; }
-.pastry-add .field-help { margin: 0; }
 .rustici-recap h5 { margin: .65rem 0 0; color: var(--accent); font-size: .86rem; }
 .rustici-recap ul { margin-top: .35rem; }
 .recap-product { min-width: 0; }
