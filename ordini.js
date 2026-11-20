@@ -58,25 +58,16 @@ const mignonWeight = document.querySelector("#mignon-weight-field");
 const mignonPreferences = document.querySelector("#mignon-preferences");
 const cakeFlavours = document.querySelector("#cake-flavours-field");
 const mignonTypes = [...mignonPreferences.querySelectorAll('input[name="mignonType"]')];
-const mignonCreams = [...mignonPreferences.querySelectorAll('input[name="mignonCream"]')];
 const flavourRows = [...document.querySelectorAll("[data-mignon-kind]")];
 const byType = document.querySelector("#mignon-by-type");
-const mixField = document.querySelector("#mignon-mix");
 
 function updateMignonChoices() {
-  const isMix = cakeFields.mignonMode.value === "mix";
   const selectedKinds = new Set(mignonTypes.filter((item) => item.checked).map((item) => item.value));
-
-  byType.hidden = isMix || !selectedKinds.size;
+  byType.hidden = selectedKinds.size === 0;
   for (const row of flavourRows) {
-    row.hidden = isMix || !selectedKinds.has(row.dataset.mignonKind);
-    row.querySelector("select").disabled = row.hidden;
+    row.hidden = !selectedKinds.has(row.dataset.mignonKind);
+    row.disabled = row.hidden;
   }
-
-  mixField.hidden = !isMix;
-  mixField.disabled = !isMix;
-  const count = mignonCreams.filter((item) => item.checked).length;
-  mignonCreams[0].setCustomValidity(isMix && count < 2 ? "Seleziona almeno due gusti per il mix." : "");
 }
 
 mignonPreferences.addEventListener("change", updateMignonChoices);
@@ -110,20 +101,12 @@ cakeForm.addEventListener("submit", (event) => {
   if (fields.type.value === "Mignon") {
     const grams = Number(fields.weight.value);
     details.push(`Peso: ${grams} g`);
-    const preferences = new FormData(cakeForm);
-    const kinds = preferences.getAll("mignonType");
+    const flavours = flavourRows.filter((row) => !row.hidden).map((row) => {
+      const selected = [...row.querySelectorAll("input:checked")].map((item) => item.value);
+      return `- ${row.dataset.mignonKind}: ${selected.join(", ") || "a scelta del bar"}`;
+    });
     const notes = fields.mignonNotes.value.trim();
-
-    if (fields.mignonMode.value === "mix") {
-      if (kinds.length) details.push(`Tipi di mignon: ${kinds.join(", ")}`);
-      details.push(`Mix di gusti: ${preferences.getAll("mignonCream").join(", ")}`);
-    } else {
-      const flavours = flavourRows.filter((row) => !row.hidden).map((row) => {
-        const flavour = row.querySelector("select").value || "a scelta del bar";
-        return `- ${row.dataset.mignonKind}: ${flavour}`;
-      });
-      if (flavours.length) details.push("Gusti per tipo:", ...flavours);
-    }
+    if (flavours.length) details.push("Gusti per tipo:", ...flavours);
     if (notes) details.push(`Altre preferenze: ${notes}`);
   } else {
     fields.flavours.value = fields.flavours.value.trim();

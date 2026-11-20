@@ -205,15 +205,12 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .mignon-choice-stack { display: grid; gap: .8rem; margin-block: .6rem .85rem; }
 .mignon-type-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem; }
 .mignon-type-grid label { margin: 0; }
-.mignon-mode { max-width: none; }
-.mignon-by-type { display: grid; gap: .3rem; }
-.mignon-flavour-row { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: .4rem; padding: .4rem .55rem; border: 1px solid var(--line); border-radius: .45rem; background: var(--card); }
-.mignon-flavour-row label { margin: 0; }
-#mignon-mix .field-help { margin-bottom: .4rem; }
+.mignon-by-type { display: grid; gap: .55rem; }
+.mignon-flavour-row { padding: .45rem .55rem .55rem; border: 1px solid var(--line); border-radius: .55rem; background: var(--card); }
+.mignon-flavour-row legend { padding-inline: .25rem; color: var(--accent); }
+.mignon-flavour-options { display: flex; flex-wrap: wrap; gap: .34rem; }
+.mignon-flavour-options label { margin: 0; }
 .mignon-choice legend { margin-bottom: .36rem; padding: 0; font-size: .88rem; font-weight: 800; }
 .mignon-choice label { display: flex; align-items: center; gap: .5rem; min-height: 2.6rem; padding: .45rem .55rem; border: 1px solid var(--line); border-radius: .45rem; background: var(--card); cursor: pointer; }
 .mignon-choice label:has(:checked) { color: var(--accent); background: var(--light); border-color: #9ab69c; }
 .mignon-choice input { flex: none; width: 1.04rem; height: 1.04rem; margin: 0; accent-color: var(--accent); }
-@media (max-width: 400px) {
-  .mignon-flavour-row { grid-template-columns: 1fr; }
-}
