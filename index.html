@@ -9,7 +9,7 @@
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
 <link rel="stylesheet" href="style.css?v=varieta">
-<script src="ordini.js?v=5" defer></script>
+<script src="ordini.js?v=6" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -126,6 +126,14 @@
             <div>
               <label for="cake-flavours">Gusti</label>
               <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
+            </div>
+            <div id="cake-topping-field" hidden>
+              <label for="cake-topping">Copertura <span class="field-optional">· facoltativa</span></label>
+              <select id="cake-topping" name="topping" disabled>
+                <option value="">Seleziona la copertura</option>
+                <option>Panna</option>
+                <option>Glassa al cioccolato</option>
+              </select>
             </div>
             <div id="cake-decoration">
               <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>

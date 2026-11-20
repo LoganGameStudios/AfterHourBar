@@ -50,10 +50,14 @@ showSelectedForm();
 const cakeFields = cakeForm.elements;
 const cakeFormat = document.querySelector("#cake-format");
 const cakeDecoration = document.querySelector("#cake-decoration");
+const cakeTopping = document.querySelector("#cake-topping-field");
 const mignonQuantity = document.querySelector("#mignon-quantity");
 
 function updatePastryOptions() {
   const isMignon = cakeFields.type.value === "Mignon";
+  const isClassic = cakeFields.type.value === "Torta classica";
+  cakeTopping.hidden = !isClassic;
+  cakeFields.topping.disabled = !isClassic;
   cakeFormat.hidden = isMignon;
   cakeDecoration.hidden = isMignon;
   cakeFields.size.disabled = isMignon;
@@ -75,6 +79,9 @@ cakeForm.addEventListener("submit", (event) => {
     if (fields.pieces.value) details.push(`Quantità: ${fields.pieces.value} pezzi`);
   } else {
     details.push(`Formato: ${fields.size.value}`);
+    if (!fields.topping.disabled && fields.topping.value) {
+      details.push(`Copertura: ${fields.topping.value}`);
+    }
     const inscription = fields.inscription.value.trim();
     if (inscription) details.push(`Scritta sulla torta: ${inscription}`);
   }
