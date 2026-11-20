@@ -229,3 +229,6 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .recap-product { min-width: 0; }
 .recap-product strong, .recap-product small { display: block; white-space: normal; overflow-wrap: anywhere; }
 .recap-product small { margin-top: .2rem; color: var(--muted); font-size: .78rem; }
+
+.pastry-add { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem .8rem; }
+.pastry-add .field-help { margin: 0; }

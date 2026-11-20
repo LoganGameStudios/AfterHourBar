@@ -11,7 +11,9 @@ const orderRecap = document.querySelector("#order-recap");
 const emptyOrderError = document.querySelector("#order-empty-error");
 const pastryRecap = document.querySelector("#pastry-recap");
 const pastryRecapItems = document.querySelector("#pastry-recap-items");
-const pastryDrafts = new Map();
+const addPastry = document.querySelector("#add-pastry");
+const pastryStatus = document.querySelector("#pastry-status");
+const pastryItems = [];
 const rusticiRecap = document.querySelector("#rustici-recap");
 const rusticiRecapItems = document.querySelector("#rustici-recap-items");
 const rusticiRecapTotal = document.querySelector("#rustici-recap-total");
@@ -53,7 +55,6 @@ function showSelectedForm() {
   pastry.disabled = pastry.hidden;
   savoury.hidden = kind === "pasticceria";
   savoury.disabled = savoury.hidden;
-  if (!pastry.hidden) savePastryDraft();
   updateOrderRecap();
 }
 
@@ -76,6 +77,7 @@ function updateMignonChoices() {
   }
 }
 
+mignonPreferences.addEventListener("change", updateMignonChoices);
 updateMignonChoices();
 
 function updatePastryOptions() {
@@ -95,6 +97,7 @@ function updatePastryOptions() {
   orderFields.flavours.disabled = isMignon;
 }
 
+orderFields.type.addEventListener("change", updatePastryOptions);
 updatePastryOptions();
 
 function pastryDetails() {
@@ -112,7 +115,8 @@ function pastryDetails() {
     if (flavours.length) details.push("Gusti per tipo:", ...flavours);
     if (notes) details.push(`Altre preferenze: ${notes}`);
   } else {
-    details.push(`Gusti: ${fields.flavours.value.trim()}`);
+    fields.flavours.value = fields.flavours.value.trim();
+    details.push(`Gusti: ${fields.flavours.value}`);
     details.push(`Formato: ${fields.size.value}`);
     if (!fields.topping.disabled && fields.topping.value) {
       details.push(`Copertura: ${fields.topping.value}`);
@@ -123,47 +127,30 @@ function pastryDetails() {
   return { name: fields.type.value, details };
 }
 
-const pastryControls = [...pastry.querySelectorAll("input, select")]
-  .filter((field) => field !== orderFields.type);
-let activePastryType = orderFields.type.value;
+addPastry.addEventListener("click", () => {
+  const fields = [...pastry.querySelectorAll("input, select")];
+  orderFields.flavours.value = orderFields.flavours.value.trim();
+  if (!fields.every((field) => field.reportValidity())) return;
 
-function savePastryDraft() {
-  if (!activePastryType || pastry.hidden) return;
+  const entry = pastryDetails();
+  pastryItems.push(entry);
+  pastryStatus.textContent = `${entry.name} aggiunto al riepilogo.`;
 
-  const complete = pastryControls.every((field) => !field.willValidate || field.validity.valid)
-    && (orderFields.flavours.disabled || orderFields.flavours.value.trim() !== "");
-  pastryDrafts.set(activePastryType, {
-    values: pastryControls.map((field) => field.type === "checkbox" ? field.checked : field.value),
-    entry: complete ? pastryDetails() : null
-  });
-}
-
-function restorePastryDraft(type) {
-  activePastryType = type;
-  const values = pastryDrafts.get(type)?.values;
-  pastryControls.forEach((field, index) => {
-    if (field.type === "checkbox") field.checked = Boolean(values?.[index]);
-    else field.value = values?.[index] ?? "";
-  });
+  for (const field of fields) {
+    if (field.type === "checkbox") field.checked = false;
+    else field.value = "";
+  }
   updatePastryOptions();
   updateMignonChoices();
-}
-
-function selectedPastry() {
-  return [...pastryDrafts.values()].map(({ entry }) => entry).filter(Boolean);
-}
-
-orderFields.type.addEventListener("change", () => {
-  restorePastryDraft(orderFields.type.value);
-  savePastryDraft();
   updateOrderRecap();
 });
 
-pastry.addEventListener("input", (event) => {
-  if (event.target === orderFields.type) return;
-  updateMignonChoices();
-  savePastryDraft();
-  updateOrderRecap();
+pastry.addEventListener("change", () => { pastryStatus.textContent = ""; });
+pastry.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && event.target.matches('input[type="text"]')) {
+    event.preventDefault();
+    addPastry.click();
+  }
 });
 
 const products = [...savoury.querySelectorAll(".quantity-row")].map((row) => {
@@ -265,7 +252,6 @@ function renderRecapItems(list, entries) {
 function updateOrderRecap() {
   const selected = selectedRustici();
   const total = selected.reduce((sum, item) => sum + item.pieces, 0);
-  const pastryItems = selectedPastry();
   const hasPastry = pastryItems.length > 0;
   const hasSavoury = total > 0;
   orderRecap.hidden = !hasPastry && !hasSavoury;
@@ -276,15 +262,11 @@ function updateOrderRecap() {
   orderFields.notes.disabled = savouryNotes.hidden;
   rusticiRecapTotal.textContent = `${total} ${total === 1 ? "pezzo" : "pezzi"}`;
 
-  renderRecapItems(pastryRecapItems, pastryItems.map(({ name, details }) => ({
+  renderRecapItems(pastryRecapItems, pastryItems.map(({ name, details }, index) => ({
     name,
     detail: details.map((line) => line.replace(/^- /, "")).join(" · "),
     removeItem() {
-      pastryDrafts.delete(name);
-      if (activePastryType === name) {
-        orderFields.type.value = "";
-        restorePastryDraft("");
-      }
+      pastryItems.splice(index, 1);
       updateOrderRecap();
     },
     restoreFocus() {
@@ -302,13 +284,6 @@ function updateOrderRecap() {
 
 orderForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (!pastry.hidden && activePastryType) {
-    orderFields.flavours.value = orderFields.flavours.value.trim();
-    if (!pastryControls.every((field) => field.reportValidity())) return;
-    savePastryDraft();
-  }
-
-  const pastryItems = selectedPastry();
   const selected = selectedRustici();
   if (!pastryItems.length && !selected.length) {
     emptyOrderError.hidden = false;
