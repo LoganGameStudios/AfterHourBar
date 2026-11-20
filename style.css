@@ -99,12 +99,25 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 .reviews-rating { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .45rem; margin-top: .7rem; color: var(--muted); font-size: .9rem; }
 .reviews-rating strong { color: var(--ink); font-size: 1.1rem; }
 .reviews-star, .reviews-stars { color: #8b5b16; }
-.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: .9rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
-.reviews-grid li { display: grid; padding: clamp(1rem, 3vw, 1.45rem); border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
-.reviews-grid figure { display: grid; align-content: start; grid-template-rows: auto 1fr auto; gap: .65rem; }
+.reviews-controls { display: flex; justify-content: flex-end; gap: .45rem; margin-top: 1rem; }
+.reviews-controls button { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid var(--accent); border-radius: 50%; color: var(--accent); background: var(--card); font: 1.2rem/1 system-ui; cursor: pointer; }
+.reviews-controls button:hover:not([aria-disabled="true"]) { color: white; background: var(--accent); }
+.reviews-controls button[aria-disabled="true"] { opacity: .5; cursor: default; }
+.reviews-slider { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 1.8rem) / 3); gap: .9rem; margin: .65rem 0 0; padding: 0 0 .65rem; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-color: var(--accent) var(--light); }
+.reviews-slider li { display: grid; padding: clamp(1rem, 3vw, 1.45rem); border: 1px solid var(--line); border-radius: 1rem; background: var(--card); scroll-snap-align: start; }
+.reviews-slider figure { display: grid; grid-template-rows: auto 1fr auto; gap: .65rem; }
 .reviews-stars { font-size: .98rem; letter-spacing: .12em; }
-.reviews-grid blockquote { margin: 0; font-size: 1.03rem; line-height: 1.55; }
-.reviews-grid figcaption { color: var(--muted); font-size: .84rem; font-weight: 800; }
+.reviews-slider blockquote { margin: 0; font-size: 1.03rem; line-height: 1.55; }
+.reviews-slider figcaption { color: var(--muted); font-size: .84rem; font-weight: 800; }
+@media (max-width: 900px) {
+  .reviews-slider { grid-auto-columns: calc((100% - .9rem) / 2); }
+}
+@media (max-width: 540px) {
+  .reviews-slider { grid-auto-columns: 100%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reviews-slider { scroll-behavior: smooth; }
+}
 .site-footer { background: #e8eee1; border-top: 1px solid var(--line); }
 .footer-grid { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 1rem 2rem; padding-block: clamp(1.65rem, 5vw, 3.2rem); }
 .footer-grid address { margin-top: .7rem; font-style: normal; line-height: 1.6; }

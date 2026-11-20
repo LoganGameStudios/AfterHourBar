@@ -14,3 +14,30 @@ if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-mot
     revealObserver.observe(element);
   }
 }
+
+const reviewsSlider = document.querySelector("#reviews-slider");
+
+if (reviewsSlider) {
+  const controls = document.querySelector(".reviews-controls");
+  const [previous, next] = controls.querySelectorAll("button");
+
+  function updateReviewControls() {
+    const end = reviewsSlider.scrollWidth - reviewsSlider.clientWidth;
+    controls.hidden = end <= 1;
+    previous.setAttribute("aria-disabled", String(reviewsSlider.scrollLeft <= 1));
+    next.setAttribute("aria-disabled", String(reviewsSlider.scrollLeft >= end - 1));
+  }
+
+  controls.addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button || button.getAttribute("aria-disabled") === "true") return;
+
+    const cardWidth = reviewsSlider.firstElementChild.getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(reviewsSlider).columnGap);
+    reviewsSlider.scrollBy({ left: (cardWidth + gap) * Number(button.dataset.reviewStep) });
+  });
+
+  reviewsSlider.addEventListener("scroll", updateReviewControls, { passive: true });
+  new ResizeObserver(updateReviewControls).observe(reviewsSlider);
+  updateReviewControls();
+}
