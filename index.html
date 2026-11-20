@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="After Hour Bar a Floridia. Colazioni, pasticceria, granite e rosticceria. Torte e rustici su ordinazione. Orari, contatti e indicazioni.">
-<meta name="theme-color" content="#801c30">
+<meta name="theme-color" content="#245638">
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
-<link rel="icon" type="image/png" href="logo-after-hour-05.png">
-<link rel="stylesheet" href="style.css?v=bordeaux">
-<script src="ordini.js" defer></script>
+<link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
+<link rel="stylesheet" href="style.css?v=verde-ordini">
+<script src="ordini.js?v=2" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Vai al contenuto</a>
 <header class="masthead">
   <div class="wrap header">
-    <a class="brand" href="./"><img src="logo-after-hour-05.png" alt="After Hour Bar" width="1920" height="819"></a>
+    <a class="brand" href="./"><img src="logo-after-hour-05-verde.png" alt="After Hour Bar" width="1920" height="819"></a>
     <nav aria-label="Navigazione principale">
       <a href="#banco">Il banco</a>
       <a href="#titolo-foto">Foto</a>
@@ -25,19 +25,22 @@
   </div>
 </header>
 <main id="main">
-  <section class="wrap hero" aria-labelledby="titolo">
-    <div class="hero-copy">
-      <p class="eyebrow">Corso Vittorio Emanuele · Floridia</p>
-      <h1 id="titolo">After Hour Bar</h1>
-      <p class="lead">Caffetteria, pasticceria e rosticceria</p>
-      <div class="actions">
-        <a class="button primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=After%20Hour%20Bar%2C%20Corso%20Vittorio%20Emanuele%20346%2C%2096014%20Floridia" rel="noreferrer">Indicazioni</a>
-        <a class="button secondary" href="tel:+390931948599">Chiamaci</a>
+  <section class="hero" aria-labelledby="titolo">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Corso Vittorio Emanuele · Floridia</p>
+        <h1 id="titolo">After Hour Bar</h1>
+        <p class="lead">Caffetteria, pasticceria e rosticceria</p>
+        <div class="actions">
+          <a class="button primary" href="#ordinazioni">Ordinazioni</a>
+          <a class="button secondary" href="https://www.google.com/maps/dir/?api=1&amp;destination=After%20Hour%20Bar%2C%20Corso%20Vittorio%20Emanuele%20346%2C%2096014%20Floridia" rel="noreferrer">Indicazioni</a>
+          <a class="button secondary" href="tel:+390931948599">Chiamaci</a>
+        </div>
       </div>
+      <figure class="hero-visual">
+        <img src="bar-esterno.jpg" alt="La facciata dell’After Hour Bar sul Corso Vittorio Emanuele" width="1200" height="526" fetchpriority="high">
+      </figure>
     </div>
-    <figure class="hero-visual">
-      <img src="bar-esterno.jpg" alt="La facciata dell’After Hour Bar sul Corso Vittorio Emanuele" width="1200" height="526" fetchpriority="high">
-    </figure>
   </section>
 
   <section class="visit" id="visita" aria-label="Orari e contatti">
@@ -62,10 +65,10 @@
   <section class="wrap section-space" id="banco" aria-labelledby="titolo-banco">
     <h2 id="titolo-banco">Le specialità del banco</h2>
     <ul class="offer">
-      <li class="offer-card"><h3>Colazione</h3><p>Espresso, cornetti e lievitati tipici siciliani.</p></li>
-      <li class="offer-card"><h3>Pasticceria</h3><p>Cannoli, raviole alla ricotta e torte su ordinazione.</p></li>
-      <li class="offer-card"><h3>Gelateria</h3><p>Gelati e granite di mandorla, limone, caffè e cioccolato.</p></li>
-      <li class="offer-card"><h3>Rosticceria</h3><p>Assortimenti di rustici al banco, da asporto e su ordinazione.</p></li>
+      <li class="offer-card reveal"><h3>Colazione</h3><p>Espresso, cornetti e lievitati tipici siciliani.</p></li>
+      <li class="offer-card reveal"><h3>Pasticceria</h3><p>Cannoli, raviole alla ricotta e torte su ordinazione.</p></li>
+      <li class="offer-card reveal"><h3>Gelateria</h3><p>Gelati e granite di mandorla, limone, caffè e cioccolato.</p></li>
+      <li class="offer-card reveal"><h3>Rosticceria</h3><p>Assortimenti di rustici al banco, da asporto e su ordinazione.</p></li>
     </ul>
     <p class="note">Per informazioni su allergeni e disponibilità, <a href="tel:+390931948599">chiamaci</a>.</p>
   </section>
@@ -77,23 +80,76 @@
         <p class="orders-lead">Prepariamo torte per compleanni, cerimonie e altre occasioni, oltre ad assortimenti di rustici su richiesta.</p>
         <p>Il bar ti confermerà disponibilità, prezzo e modalità di ritiro.</p>
       </div>
-      <div class="order-panel">
-        <h3>Prepara la tua richiesta</h3>
-        <form id="order-form" hidden>
-          <label for="order-product">Cosa vuoi ordinare?</label>
-          <select id="order-product" required>
-            <option value="">Seleziona</option>
-            <option value="una torta">Torta</option>
-            <option value="un assortimento di rustici">Rustici</option>
-            <option value="una torta e un assortimento di rustici">Torta e rustici</option>
-          </select>
-          <div class="order-fields">
-            <div><label for="order-date">Data di ritiro</label><input id="order-date" type="date" required></div>
-            <div><label for="order-people">Numero di persone</label><input id="order-people" type="number" min="1" step="1" inputmode="numeric" placeholder="Facoltativo"></div>
-          </div>
-          <button class="button primary" type="submit">Continua su WhatsApp</button>
-          <p class="note">Potrai modificare il messaggio prima di inviarlo.</p>
-        </form>
+      <div class="order-panel reveal">
+        <div id="order-picker" hidden>
+          <fieldset class="order-switch">
+            <legend>Che cosa vuoi ordinare?</legend>
+            <div class="order-switch-options">
+              <label><input type="radio" name="order-kind" value="torte" checked><span>Torte</span></label>
+              <label><input type="radio" name="order-kind" value="rosticceria"><span>Rosticceria</span></label>
+            </div>
+          </fieldset>
+          <form id="order-torte" class="order-form" aria-label="Ordinazione torte">
+            <div class="order-fields">
+              <div><label for="torte-surname">Cognome</label><input id="torte-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
+              <div><label for="torte-date">Giorno di ritiro</label><input id="torte-date" name="date" type="date" required></div>
+            </div>
+            <div class="order-fields">
+              <div>
+                <label for="cake-type">Tipo di torta</label>
+                <select id="cake-type" name="type" required>
+                  <option value="">Seleziona</option>
+                  <option>Torta gelato</option>
+                  <option>Torta di pasticceria (non gelato)</option>
+                </select>
+              </div>
+              <div>
+                <label for="cake-size">Formato</label>
+                <select id="cake-size" name="size" required>
+                  <option value="">Seleziona</option>
+                  <option>Piccola</option>
+                  <option>Media</option>
+                  <option>Grande</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="cake-flavours">Gusti</label>
+              <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
+            </div>
+            <div>
+              <label for="cake-weight">Peso desiderato in kg <span class="field-optional">· facoltativo</span></label>
+              <input id="cake-weight" name="weight" type="number" min="0.1" step="any" inputmode="decimal" aria-describedby="cake-weight-help">
+              <p class="field-help" id="cake-weight-help">Il bar confermerà il peso in base al formato e alla torta scelta.</p>
+            </div>
+            <button class="button primary" type="submit">Continua su WhatsApp</button>
+          </form>
+          <form id="order-rosticceria" class="order-form" aria-label="Ordinazione rosticceria" hidden>
+            <div class="order-fields">
+              <div><label for="rustici-surname">Cognome</label><input id="rustici-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
+              <div><label for="rustici-date">Giorno di ritiro</label><input id="rustici-date" name="date" type="date" required></div>
+            </div>
+            <fieldset class="rustici-options" aria-describedby="rustici-help">
+              <legend>Prodotti</legend>
+              <p class="field-help" id="rustici-help">Seleziona almeno un prodotto.</p>
+              <div class="rustici-grid">
+                <label><input type="checkbox" name="rustico" value="Arancini"><span>Arancini</span></label>
+                <label><input type="checkbox" name="rustico" value="Pizze"><span>Pizze</span></label>
+                <label><input type="checkbox" name="rustico" value="Sfoglie"><span>Sfoglie</span></label>
+                <label><input type="checkbox" name="rustico" value="Strudel"><span>Strudel</span></label>
+                <label><input type="checkbox" name="rustico" value="Cornetti salati"><span>Cornetti salati</span></label>
+                <label><input type="checkbox" name="rustico" value="Pizzoli"><span>Pizzoli</span></label>
+              </div>
+              <p class="field-error" id="rustici-error" role="alert" hidden>Seleziona almeno un prodotto per proseguire.</p>
+            </fieldset>
+            <div>
+              <label for="rustici-notes">Quantità o preferenze <span class="field-optional">· facoltativo</span></label>
+              <textarea id="rustici-notes" name="notes" maxlength="300" rows="2" placeholder="Ad esempio: 10 arancini e 6 sfoglie"></textarea>
+            </div>
+            <button class="button primary" type="submit">Continua su WhatsApp</button>
+          </form>
+          <p class="note">Potrai modificare il messaggio prima di inviarlo. <a href="privacy.html">Privacy</a></p>
+        </div>
         <a id="order-fallback" class="button primary" href="https://wa.me/393394803273" rel="noreferrer">Continua su WhatsApp</a>
       </div>
     </div>
@@ -101,7 +157,7 @@
 
   <section class="wrap section-space gallery" aria-labelledby="titolo-foto">
     <h2 id="titolo-foto">Dal locale</h2>
-    <div class="gallery-grid">
+    <div class="gallery-grid reveal">
       <figure><img src="bar-interno.jpg" alt="Il bancone in legno con la macchina del caffè e le vetrine" width="1200" height="675" loading="lazy"><figcaption>Il bancone</figcaption></figure>
       <figure><img src="bar-granita.jpg" alt="Granita in coppa accompagnata da un lievitato" width="1200" height="675" loading="lazy"><figcaption>Granita e lievitati</figcaption></figure>
     </div>
