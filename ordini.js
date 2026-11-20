@@ -9,7 +9,6 @@ const dayFormat = new Intl.DateTimeFormat("it-IT", { dateStyle: "long", timeZone
 const italianCalendar = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/Rome", year: "numeric", month: "2-digit", day: "2-digit"
 });
-const weightFormat = new Intl.NumberFormat("it-IT", { maximumFractionDigits: 3 });
 
 function todayInItaly() {
   const parts = Object.fromEntries(italianCalendar.formatToParts(new Date()).map(({ type, value }) => [type, value]));
@@ -57,9 +56,8 @@ cakeForm.addEventListener("submit", (event) => {
     `Gusti: ${fields.flavours.value}`,
     `Formato: ${fields.size.value}`
   ];
-  if (fields.weight.value) {
-    details.push(`Peso desiderato: ${weightFormat.format(fields.weight.valueAsNumber)} kg`);
-  }
+  const inscription = fields.inscription.value.trim();
+  if (inscription) details.push(`Scritta sulla torta: ${inscription}`);
   sendRequest(cakeForm, details);
 });
 

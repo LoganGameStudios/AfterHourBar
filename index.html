@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=verde-ordini-2">
-<script src="ordini.js?v=2" defer></script>
+<link rel="stylesheet" href="style.css?v=hero-torta">
+<script src="ordini.js?v=3" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Vai al contenuto</a>
@@ -105,12 +105,13 @@
               </div>
               <div>
                 <label for="cake-size">Formato</label>
-                <select id="cake-size" name="size" required>
+                <select id="cake-size" name="size" aria-describedby="cake-size-help" required>
                   <option value="">Seleziona</option>
                   <option>Piccola</option>
                   <option>Media</option>
                   <option>Grande</option>
                 </select>
+                <p class="field-help" id="cake-size-help">Il formato determina il peso della torta.</p>
               </div>
             </div>
             <div>
@@ -118,9 +119,8 @@
               <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
             </div>
             <div>
-              <label for="cake-weight">Peso desiderato in kg <span class="field-optional">· facoltativo</span></label>
-              <input id="cake-weight" name="weight" type="number" min="0.1" step="any" inputmode="decimal" aria-describedby="cake-weight-help">
-              <p class="field-help" id="cake-weight-help">Il bar confermerà il peso in base al formato e alla torta scelta.</p>
+              <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
+              <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
             </div>
             <button class="button primary" type="submit">Continua su WhatsApp</button>
           </form>
