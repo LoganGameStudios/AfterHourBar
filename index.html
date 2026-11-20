@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=richiesta">
-<script src="ordini.js?v=14" defer></script>
+<link rel="stylesheet" href="style.css?v=ordine-unico">
+<script src="ordini.js?v=15" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -88,303 +88,293 @@
             <div class="order-switch-options">
               <label><input type="radio" name="order-kind" value="pasticceria" checked><span>Pasticceria</span></label>
               <label><input type="radio" name="order-kind" value="rosticceria"><span>Rosticceria</span></label>
+              <label><input type="radio" name="order-kind" value="entrambi"><span>Entrambi</span></label>
             </div>
           </fieldset>
-          <form id="order-torte" class="order-form" aria-label="Ordinazione pasticceria">
-            <fieldset class="order-group order-products">
-              <legend>Scelta dei prodotti</legend>
-              <div class="order-fields">
-                <div>
-                  <label for="cake-type">Prodotto</label>
-                  <select id="cake-type" name="type" required>
-                    <option value="">Seleziona</option>
-                    <option>Torta gelato</option>
-                    <option>Torta classica</option>
-                    <option>Mignon</option>
-                  </select>
-                </div>
-                <div id="cake-format">
-                  <label for="cake-size">Formato</label>
-                  <select id="cake-size" name="size" aria-describedby="cake-size-help" required>
-                    <option value="">Seleziona</option>
-                    <option>Piccola</option>
-                    <option>Media</option>
-                    <option>Grande</option>
-                  </select>
-                  <p class="field-help" id="cake-size-help">Il formato determina il peso della torta.</p>
-                </div>
-                <div id="mignon-weight-field" hidden>
-                  <label for="mignon-weight">Peso dei mignon (g)</label>
-                  <select id="mignon-weight" name="weight" aria-describedby="mignon-weight-help" required disabled>
-                    <option value="">Seleziona il peso</option>
-                    <option value="250">250 g</option>
-                    <option value="500">500 g</option>
-                    <option value="750">750 g</option>
-                    <option value="1000">1 kg</option>
-                    <option value="1250">1,25 kg</option>
-                    <option value="1500">1,5 kg</option>
-                    <option value="1750">1,75 kg</option>
-                    <option value="2000">2 kg</option>
-                    <option value="2250">2,25 kg</option>
-                    <option value="2500">2,5 kg</option>
-                  </select>
-                  <p class="field-help" id="mignon-weight-help">Da 250 g a 2,5 kg.</p>
-                </div>
-              </div>
-              <fieldset class="mignon-preferences" id="mignon-preferences" hidden disabled>
-                <legend>Preferenze per i mignon</legend>
-                <p class="field-help">Scegli i tipi che preferisci, poi abbina i gusti.</p>
-                <div class="mignon-choice-stack">
-                  <fieldset class="mignon-choice mignon-types">
-                    <legend>Tipi di mignon</legend>
-                    <div class="mignon-type-grid">
-                    <label for="mignon-bigne"><input id="mignon-bigne" name="mignonType" type="checkbox" value="Bignè"><span>Bignè</span></label>
-                    <label for="mignon-cannolini"><input id="mignon-cannolini" name="mignonType" type="checkbox" value="Cannolini"><span>Cannolini</span></label>
-                    <label for="mignon-baba"><input id="mignon-baba" name="mignonType" type="checkbox" value="Mini babà"><span>Mini babà</span></label>
-                    <label for="mignon-tartellette"><input id="mignon-tartellette" name="mignonType" type="checkbox" value="Tartellette"><span>Tartellette</span></label>
-                    </div>
-                  </fieldset>
-                  <div class="mignon-by-type" id="mignon-by-type" hidden>
-                    <p class="field-help">Per ogni tipo puoi scegliere uno o più gusti. Selezionali tutti per un mix completo.</p>
-                    <fieldset class="mignon-flavour-row mignon-choice" data-mignon-kind="Bignè" hidden disabled>
-                      <legend>Bignè</legend>
-                      <div class="mignon-flavour-options">
-                        <label for="mignon-bigne-cioccolato"><input id="mignon-bigne-cioccolato" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
-                        <label for="mignon-bigne-crema"><input id="mignon-bigne-crema" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
-                        <label for="mignon-bigne-ricotta"><input id="mignon-bigne-ricotta" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
-                      </div>
-                    </fieldset>
-                    <fieldset class="mignon-flavour-row mignon-choice" data-mignon-kind="Cannolini" hidden disabled>
-                      <legend>Cannolini</legend>
-                      <div class="mignon-flavour-options">
-                        <label for="mignon-cannolini-cioccolato"><input id="mignon-cannolini-cioccolato" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
-                        <label for="mignon-cannolini-crema"><input id="mignon-cannolini-crema" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
-                        <label for="mignon-cannolini-ricotta"><input id="mignon-cannolini-ricotta" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
-                      </div>
-                    </fieldset>
-                    <fieldset class="mignon-flavour-row mignon-choice" data-mignon-kind="Mini babà" hidden disabled>
-                      <legend>Mini babà</legend>
-                      <div class="mignon-flavour-options">
-                        <label for="mignon-baba-cioccolato"><input id="mignon-baba-cioccolato" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
-                        <label for="mignon-baba-crema"><input id="mignon-baba-crema" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
-                        <label for="mignon-baba-ricotta"><input id="mignon-baba-ricotta" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
-                      </div>
-                    </fieldset>
-                    <fieldset class="mignon-flavour-row mignon-choice" data-mignon-kind="Tartellette" hidden disabled>
-                      <legend>Tartellette</legend>
-                      <div class="mignon-flavour-options">
-                        <label for="mignon-tartellette-cioccolato"><input id="mignon-tartellette-cioccolato" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
-                        <label for="mignon-tartellette-crema"><input id="mignon-tartellette-crema" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
-                        <label for="mignon-tartellette-ricotta"><input id="mignon-tartellette-ricotta" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
-                      </div>
-                    </fieldset>
+          <form id="order-form" class="order-form" aria-label="Richiesta di ordinazione">
+            <div class="order-selection">
+              <fieldset id="order-torte" class="order-group order-products">
+                <legend>Pasticceria</legend>
+                <div class="order-fields">
+                  <div>
+                    <label for="cake-type">Prodotto</label>
+                    <select id="cake-type" name="type" required>
+                      <option value="">Seleziona</option>
+                      <option>Torta gelato</option>
+                      <option>Torta classica</option>
+                      <option>Mignon</option>
+                    </select>
+                  </div>
+                  <div id="cake-format">
+                    <label for="cake-size">Formato</label>
+                    <select id="cake-size" name="size" aria-describedby="cake-size-help" required>
+                      <option value="">Seleziona</option>
+                      <option>Piccola</option>
+                      <option>Media</option>
+                      <option>Grande</option>
+                    </select>
+                    <p class="field-help" id="cake-size-help">Il formato determina il peso della torta.</p>
+                  </div>
+                  <div id="mignon-weight-field" hidden>
+                    <label for="mignon-weight">Peso dei mignon (g)</label>
+                    <select id="mignon-weight" name="weight" aria-describedby="mignon-weight-help" required disabled>
+                      <option value="">Seleziona il peso</option>
+                      <option value="250">250 g</option>
+                      <option value="500">500 g</option>
+                      <option value="750">750 g</option>
+                      <option value="1000">1 kg</option>
+                      <option value="1250">1,25 kg</option>
+                      <option value="1500">1,5 kg</option>
+                      <option value="1750">1,75 kg</option>
+                      <option value="2000">2 kg</option>
+                      <option value="2250">2,25 kg</option>
+                      <option value="2500">2,5 kg</option>
+                    </select>
+                    <p class="field-help" id="mignon-weight-help">Da 250 g a 2,5 kg.</p>
                   </div>
                 </div>
-                <label for="mignon-notes">Altre preferenze <span class="field-optional">· facoltativo</span></label>
-                <input id="mignon-notes" name="mignonNotes" type="text" maxlength="160" placeholder="Indica eventuali altri tipi o gusti">
-              </fieldset>
-              <div id="cake-flavours-field">
-                <label for="cake-flavours">Gusti</label>
-                <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
-              </div>
-              <div id="cake-topping-field" hidden>
-                <label for="cake-topping">Copertura <span class="field-optional">· facoltativa</span></label>
-                <select id="cake-topping" name="topping" disabled>
-                  <option value="">Seleziona la copertura</option>
-                  <option>Panna</option>
-                  <option>Glassa al cioccolato</option>
-                </select>
-              </div>
-              <div id="cake-decoration">
-                <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
-                <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
-              </div>
-            </fieldset>
-            <div class="order-side">
-              <fieldset class="order-group">
-                <legend>Dati per il ritiro</legend>
-                <div class="order-fields">
-                <div><label for="torte-surname">Cognome</label><input id="torte-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
-                <div><label for="torte-date">Giorno di ritiro</label><input id="torte-date" name="date" type="date" required></div>
+                <fieldset class="mignon-preferences" id="mignon-preferences" hidden disabled>
+                  <legend>Preferenze per i mignon</legend>
+                  <p class="field-help">Scegli i tipi che preferisci, poi abbina i gusti.</p>
+                  <div class="mignon-choice-stack">
+                    <fieldset class="mignon-choice mignon-types">
+                      <legend>Tipi di mignon</legend>
+                      <div class="mignon-type-grid">
+                      <label for="mignon-bigne"><input id="mignon-bigne" name="mignonType" type="checkbox" value="Bignè"><span>Bignè</span></label>
+                      <label for="mignon-cannolini"><input id="mignon-cannolini" name="mignonType" type="checkbox" value="Cannolini"><span>Cannolini</span></label>
+                      <label for="mignon-baba"><input id="mignon-baba" name="mignonType" type="checkbox" value="Mini babà"><span>Mini babà</span></label>
+                      <label for="mignon-tartellette"><input id="mignon-tartellette" name="mignonType" type="checkbox" value="Tartellette"><span>Tartellette</span></label>
+                      </div>
+                    </fieldset>
+                    <div class="mignon-by-type" id="mignon-by-type" hidden>
+                      <p class="field-help">Per ogni tipo puoi scegliere uno o più gusti. Selezionali tutti per un mix completo.</p>
+                      <fieldset class="mignon-flavour-row mignon-choice" data-mignon-kind="Bignè" hidden disabled>
+                        <legend>Bignè</legend>
+                        <div class="mignon-flavour-options">
+                          <label for="mignon-bigne-cioccolato"><input id="mignon-bigne-cioccolato" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
+                          <label for="mignon-bigne-crema"><input id="mignon-bigne-crema" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
+                          <label for="mignon-bigne-ricotta"><input id="mignon-bigne-ricotta" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
+                        </div>
+                      </fieldset>
+                      <fieldset class="mignon-flavour-row mignon-choice" data-mignon-kind="Cannolini" hidden disabled>
+                        <legend>Cannolini</legend>
+                        <div class="mignon-flavour-options">
+                          <label for="mignon-cannolini-cioccolato"><input id="mignon-cannolini-cioccolato" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
+                          <label for="mignon-cannolini-crema"><input id="mignon-cannolini-crema" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
+                          <label for="mignon-cannolini-ricotta"><input id="mignon-cannolini-ricotta" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
+                        </div>
+                      </fieldset>
+                      <fieldset class="mignon-flavour-row mignon-choice" data-mignon-kind="Mini babà" hidden disabled>
+                        <legend>Mini babà</legend>
+                        <div class="mignon-flavour-options">
+                          <label for="mignon-baba-cioccolato"><input id="mignon-baba-cioccolato" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
+                          <label for="mignon-baba-crema"><input id="mignon-baba-crema" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
+                          <label for="mignon-baba-ricotta"><input id="mignon-baba-ricotta" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
+                        </div>
+                      </fieldset>
+                      <fieldset class="mignon-flavour-row mignon-choice" data-mignon-kind="Tartellette" hidden disabled>
+                        <legend>Tartellette</legend>
+                        <div class="mignon-flavour-options">
+                          <label for="mignon-tartellette-cioccolato"><input id="mignon-tartellette-cioccolato" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
+                          <label for="mignon-tartellette-crema"><input id="mignon-tartellette-crema" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
+                          <label for="mignon-tartellette-ricotta"><input id="mignon-tartellette-ricotta" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                  <label for="mignon-notes">Altre preferenze <span class="field-optional">· facoltativo</span></label>
+                  <input id="mignon-notes" name="mignonNotes" type="text" maxlength="160" placeholder="Indica eventuali altri tipi o gusti">
+                </fieldset>
+                <div id="cake-flavours-field">
+                  <label for="cake-flavours">Gusti</label>
+                  <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
+                </div>
+                <div id="cake-topping-field" hidden>
+                  <label for="cake-topping">Copertura <span class="field-optional">· facoltativa</span></label>
+                  <select id="cake-topping" name="topping" disabled>
+                    <option value="">Seleziona la copertura</option>
+                    <option>Panna</option>
+                    <option>Glassa al cioccolato</option>
+                  </select>
+                </div>
+                <div id="cake-decoration">
+                  <label for="cake-inscription">Scritta sulla torta <span class="field-optional">· facoltativa</span></label>
+                  <input id="cake-inscription" name="inscription" type="text" maxlength="100" placeholder="Ad esempio: Buon compleanno, Anna!">
                 </div>
               </fieldset>
-              <button class="button primary order-submit" type="submit" aria-describedby="order-note-1">Continua su WhatsApp</button>
-              <p class="note order-note" id="order-note-1">L’invio della richiesta non ti impegna all’acquisto. Potrai modificare il messaggio prima di inviarlo. <a href="privacy.html">Privacy</a></p>
+              <fieldset id="order-rosticceria" class="rustici-options order-products" hidden disabled aria-describedby="rustici-help">
+                <legend>Rosticceria</legend>
+                <p class="field-help" id="rustici-help">Apri una categoria per scegliere le varietà. Usa − e + per indicare le quantità.</p>
+                <div class="rustici-grid">
+                  <details class="quantity-group" name="varieta-rosticceria">
+                    <summary>
+                      <span class="quantity-name">Arancini</span>
+                      <span class="quantity-total">3 varietà</span>
+                    </summary>
+                    <div class="quantity-group-items">
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-arancini-al-forno">Al forno</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-forno">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al forno" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di arancini al forno" data-quantity="Arancini al forno">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al forno">+</button>
+                        </div>
+                      </div>
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-arancini-al-ragu">Al ragù</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-ragu">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al ragù" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di arancini al ragù" data-quantity="Arancini al ragù">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al ragù">+</button>
+                        </div>
+                      </div>
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-arancini-con-spinaci">Con spinaci</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-con-spinaci">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini con spinaci" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di arancini con spinaci" data-quantity="Arancini con spinaci">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini con spinaci">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+                  <div class="quantity-row">
+                    <span class="quantity-name" id="product-cornetti">Cornetti salati</span>
+                    <div class="quantity-stepper" role="group" aria-labelledby="product-cornetti">
+                      <button type="button" data-step="-1" aria-label="Diminuisci la quantità di cornetti salati" aria-disabled="true">−</button>
+                      <output aria-label="Quantità di cornetti salati" data-quantity="Cornetti salati">0</output>
+                      <button type="button" data-step="1" aria-label="Aumenta la quantità di cornetti salati">+</button>
+                    </div>
+                  </div>
+                  <details class="quantity-group" name="varieta-rosticceria">
+                    <summary>
+                      <span class="quantity-name">Pizze</span>
+                      <span class="quantity-total">3 varietà</span>
+                    </summary>
+                    <div class="quantity-group-items">
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-pizze-capricciosa">Capricciosa</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-capricciosa">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza capricciosa" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di pizza capricciosa" data-quantity="Pizza capricciosa">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza capricciosa">+</button>
+                        </div>
+                      </div>
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-pizze-margherita">Margherita</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-margherita">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza margherita" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di pizza margherita" data-quantity="Pizza margherita">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza margherita">+</button>
+                        </div>
+                      </div>
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-pizze-prosciutto-cotto">Prosciutto cotto</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-prosciutto-cotto">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza con prosciutto cotto" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di pizza con prosciutto cotto" data-quantity="Pizza con prosciutto cotto">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza con prosciutto cotto">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+                  <details class="quantity-group" name="varieta-rosticceria">
+                    <summary>
+                      <span class="quantity-name">Pizzoli</span>
+                      <span class="quantity-total">3 varietà</span>
+                    </summary>
+                    <div class="quantity-group-items">
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-pizzoli-prosciutto">Prosciutto</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-prosciutto">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli con prosciutto" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di pizzoli con prosciutto" data-quantity="Pizzoli con prosciutto">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli con prosciutto">+</button>
+                        </div>
+                      </div>
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-pizzoli-salame-piccante">Salame piccante</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-salame-piccante">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli al salame piccante" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di pizzoli al salame piccante" data-quantity="Pizzoli al salame piccante">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli al salame piccante">+</button>
+                        </div>
+                      </div>
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-pizzoli-spinaci">Spinaci</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-spinaci">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli con spinaci" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di pizzoli con spinaci" data-quantity="Pizzoli con spinaci">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli con spinaci">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+                  <details class="quantity-group" name="varieta-rosticceria">
+                    <summary>
+                      <span class="quantity-name">Sfoglie</span>
+                      <span class="quantity-total">3 varietà</span>
+                    </summary>
+                    <div class="quantity-group-items">
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-sfoglie-prosciutto">Prosciutto</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-prosciutto">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con prosciutto" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di sfoglie con prosciutto" data-quantity="Sfoglie con prosciutto">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con prosciutto">+</button>
+                        </div>
+                      </div>
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-sfoglie-spinaci">Spinaci</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-spinaci">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con spinaci" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di sfoglie con spinaci" data-quantity="Sfoglie con spinaci">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con spinaci">+</button>
+                        </div>
+                      </div>
+                      <div class="quantity-row">
+                        <span class="quantity-name" id="product-sfoglie-wurstel">Würstel</span>
+                        <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-wurstel">
+                          <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con würstel" aria-disabled="true">−</button>
+                          <output aria-label="Quantità di sfoglie con würstel" data-quantity="Sfoglie con würstel">0</output>
+                          <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con würstel">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+                  <div class="quantity-row">
+                    <span class="quantity-name" id="product-strudel">Strudel</span>
+                    <div class="quantity-stepper" role="group" aria-labelledby="product-strudel">
+                      <button type="button" data-step="-1" aria-label="Diminuisci la quantità di strudel" aria-disabled="true">−</button>
+                      <output aria-label="Quantità di strudel" data-quantity="Strudel">0</output>
+                      <button type="button" data-step="1" aria-label="Aumenta la quantità di strudel">+</button>
+                    </div>
+                  </div>
+                </div>
+                <p class="field-error" id="rustici-error" role="alert" hidden>Aggiungi almeno un pezzo per proseguire.</p>
+              </fieldset>
             </div>
-          </form>
-          <form id="order-rosticceria" class="order-form" aria-label="Ordinazione rosticceria" hidden>
-            <fieldset class="rustici-options order-products" aria-describedby="rustici-help">
-              <legend>Prodotti e quantità</legend>
-              <p class="field-help" id="rustici-help">Apri una categoria per scegliere le varietà. Usa − e + per indicare le quantità.</p>
-              <div class="rustici-grid">
-                <details class="quantity-group" name="varieta-rosticceria">
-                  <summary>
-                    <span class="quantity-name">Arancini</span>
-                    <span class="quantity-total">3 varietà</span>
-                  </summary>
-                  <div class="quantity-group-items">
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-arancini-al-forno">Al forno</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-forno">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al forno" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di arancini al forno" data-quantity="Arancini al forno">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al forno">+</button>
-                      </div>
-                    </div>
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-arancini-al-ragu">Al ragù</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-al-ragu">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini al ragù" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di arancini al ragù" data-quantity="Arancini al ragù">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini al ragù">+</button>
-                      </div>
-                    </div>
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-arancini-con-spinaci">Con spinaci</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-arancini-con-spinaci">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di arancini con spinaci" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di arancini con spinaci" data-quantity="Arancini con spinaci">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di arancini con spinaci">+</button>
-                      </div>
-                    </div>
-                  </div>
-                </details>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-cornetti">Cornetti salati</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-cornetti">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di cornetti salati" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di cornetti salati" data-quantity="Cornetti salati">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di cornetti salati">+</button>
-                  </div>
-                </div>
-                <details class="quantity-group" name="varieta-rosticceria">
-                  <summary>
-                    <span class="quantity-name">Pizze</span>
-                    <span class="quantity-total">3 varietà</span>
-                  </summary>
-                  <div class="quantity-group-items">
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-pizze-capricciosa">Capricciosa</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-capricciosa">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza capricciosa" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di pizza capricciosa" data-quantity="Pizza capricciosa">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza capricciosa">+</button>
-                      </div>
-                    </div>
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-pizze-margherita">Margherita</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-margherita">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza margherita" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di pizza margherita" data-quantity="Pizza margherita">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza margherita">+</button>
-                      </div>
-                    </div>
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-pizze-prosciutto-cotto">Prosciutto cotto</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizze-prosciutto-cotto">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizza con prosciutto cotto" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di pizza con prosciutto cotto" data-quantity="Pizza con prosciutto cotto">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizza con prosciutto cotto">+</button>
-                      </div>
-                    </div>
-                  </div>
-                </details>
-                <details class="quantity-group" name="varieta-rosticceria">
-                  <summary>
-                    <span class="quantity-name">Pizzoli</span>
-                    <span class="quantity-total">3 varietà</span>
-                  </summary>
-                  <div class="quantity-group-items">
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-pizzoli-prosciutto">Prosciutto</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-prosciutto">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli con prosciutto" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di pizzoli con prosciutto" data-quantity="Pizzoli con prosciutto">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli con prosciutto">+</button>
-                      </div>
-                    </div>
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-pizzoli-salame-piccante">Salame piccante</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-salame-piccante">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli al salame piccante" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di pizzoli al salame piccante" data-quantity="Pizzoli al salame piccante">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli al salame piccante">+</button>
-                      </div>
-                    </div>
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-pizzoli-spinaci">Spinaci</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-pizzoli-spinaci">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di pizzoli con spinaci" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di pizzoli con spinaci" data-quantity="Pizzoli con spinaci">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di pizzoli con spinaci">+</button>
-                      </div>
-                    </div>
-                  </div>
-                </details>
-                <details class="quantity-group" name="varieta-rosticceria">
-                  <summary>
-                    <span class="quantity-name">Sfoglie</span>
-                    <span class="quantity-total">3 varietà</span>
-                  </summary>
-                  <div class="quantity-group-items">
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-sfoglie-prosciutto">Prosciutto</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-prosciutto">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con prosciutto" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di sfoglie con prosciutto" data-quantity="Sfoglie con prosciutto">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con prosciutto">+</button>
-                      </div>
-                    </div>
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-sfoglie-spinaci">Spinaci</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-spinaci">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con spinaci" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di sfoglie con spinaci" data-quantity="Sfoglie con spinaci">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con spinaci">+</button>
-                      </div>
-                    </div>
-                    <div class="quantity-row">
-                      <span class="quantity-name" id="product-sfoglie-wurstel">Würstel</span>
-                      <div class="quantity-stepper" role="group" aria-labelledby="product-sfoglie-wurstel">
-                        <button type="button" data-step="-1" aria-label="Diminuisci la quantità di sfoglie con würstel" aria-disabled="true">−</button>
-                        <output aria-label="Quantità di sfoglie con würstel" data-quantity="Sfoglie con würstel">0</output>
-                        <button type="button" data-step="1" aria-label="Aumenta la quantità di sfoglie con würstel">+</button>
-                      </div>
-                    </div>
-                  </div>
-                </details>
-                <div class="quantity-row">
-                  <span class="quantity-name" id="product-strudel">Strudel</span>
-                  <div class="quantity-stepper" role="group" aria-labelledby="product-strudel">
-                    <button type="button" data-step="-1" aria-label="Diminuisci la quantità di strudel" aria-disabled="true">−</button>
-                    <output aria-label="Quantità di strudel" data-quantity="Strudel">0</output>
-                    <button type="button" data-step="1" aria-label="Aumenta la quantità di strudel">+</button>
-                  </div>
-                </div>
-              </div>
-              <p class="field-error" id="rustici-error" role="alert" hidden>Aggiungi almeno un pezzo per proseguire.</p>
-            </fieldset>
             <div class="order-side">
               <fieldset class="order-group">
                 <legend>Dati per il ritiro</legend>
                 <div class="order-fields">
-                <div><label for="rustici-surname">Cognome</label><input id="rustici-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
-                <div><label for="rustici-date">Giorno di ritiro</label><input id="rustici-date" name="date" type="date" required></div>
+                  <div><label for="order-surname">Cognome</label><input id="order-surname" name="surname" type="text" autocomplete="family-name" maxlength="80" required></div>
+                  <div><label for="order-date">Giorno di ritiro</label><input id="order-date" name="date" type="date" required></div>
                 </div>
               </fieldset>
-              <div>
+              <div id="rustici-notes-field" hidden>
                 <label for="rustici-notes">Preferenze <span class="field-optional">· facoltativo</span></label>
-                <textarea id="rustici-notes" name="notes" maxlength="300" rows="2" placeholder="Ad esempio: confezioni separate"></textarea>
+                <textarea id="rustici-notes" name="notes" disabled maxlength="300" rows="2" placeholder="Ad esempio: confezioni separate"></textarea>
               </div>
               <section class="rustici-recap" id="rustici-recap" aria-labelledby="rustici-recap-title" hidden>
                 <div class="recap-heading">
-                  <h4 id="rustici-recap-title">Riepilogo</h4>
+                  <h4 id="rustici-recap-title">Riepilogo rosticceria</h4>
                   <span id="rustici-recap-total"></span>
                 </div>
                 <ul id="rustici-recap-items"></ul>
               </section>
-              <button class="button primary order-submit" type="submit" aria-describedby="order-note-2">Continua su WhatsApp</button>
-              <p class="note order-note" id="order-note-2">L’invio della richiesta non ti impegna all’acquisto. Potrai modificare il messaggio prima di inviarlo. <a href="privacy.html">Privacy</a></p>
+              <button class="button primary order-submit" type="submit" aria-describedby="order-note">Continua su WhatsApp</button>
+              <p class="note order-note" id="order-note">L’invio della richiesta non ti impegna all’acquisto. Potrai modificare il messaggio prima di inviarlo. <a href="privacy.html">Privacy</a></p>
             </div>
           </form>
         </div>

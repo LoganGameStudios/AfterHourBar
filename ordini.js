@@ -2,8 +2,11 @@
 
 const picker = document.querySelector("#order-picker");
 const whatsapp = document.querySelector("#order-fallback");
-const cakeForm = document.querySelector("#order-torte");
-const savouryForm = document.querySelector("#order-rosticceria");
+const orderForm = document.querySelector("#order-form");
+const orderFields = orderForm.elements;
+const pastry = document.querySelector("#order-torte");
+const savoury = document.querySelector("#order-rosticceria");
+const savouryNotes = document.querySelector("#rustici-notes-field");
 const rusticiError = document.querySelector("#rustici-error");
 const rusticiRecap = document.querySelector("#rustici-recap");
 const rusticiRecapItems = document.querySelector("#rustici-recap-items");
@@ -18,11 +21,11 @@ function todayInItaly() {
   return `${parts.year}-${parts.month}-${parts.day}`;
 }
 
-function sendRequest(form, details) {
-  const fields = form.elements;
+function sendRequest(details) {
+  const fields = orderFields;
   fields.date.min = todayInItaly();
   fields.surname.value = fields.surname.value.trim();
-  if (!form.reportValidity()) return;
+  if (!orderForm.reportValidity()) return;
 
   const date = dayFormat.format(new Date(`${fields.date.value}T00:00:00Z`));
   const message = [
@@ -36,21 +39,21 @@ function sendRequest(form, details) {
   window.location.assign(link.href);
 }
 
-for (const form of [cakeForm, savouryForm]) {
-  form.elements.date.min = todayInItaly();
-}
+orderFields.date.min = todayInItaly();
 
 const orderSwitch = picker.querySelector(".order-switch");
+
 function showSelectedForm() {
-  const showCake = orderSwitch.querySelector("input:checked").value === "pasticceria";
-  cakeForm.hidden = !showCake;
-  savouryForm.hidden = showCake;
+  const kind = orderSwitch.querySelector("input:checked").value;
+  pastry.hidden = kind === "rosticceria";
+  pastry.disabled = pastry.hidden;
+  savoury.hidden = kind === "pasticceria";
+  savoury.disabled = savoury.hidden;
+  savouryNotes.hidden = savoury.hidden;
+  orderFields.notes.disabled = savoury.hidden;
+  updateRusticiRecap();
 }
 
-orderSwitch.addEventListener("change", showSelectedForm);
-showSelectedForm();
-
-const cakeFields = cakeForm.elements;
 const cakeFormat = document.querySelector("#cake-format");
 const cakeDecoration = document.querySelector("#cake-decoration");
 const cakeTopping = document.querySelector("#cake-topping-field");
@@ -74,28 +77,27 @@ mignonPreferences.addEventListener("change", updateMignonChoices);
 updateMignonChoices();
 
 function updatePastryOptions() {
-  const isMignon = cakeFields.type.value === "Mignon";
-  const isClassic = cakeFields.type.value === "Torta classica";
+  const isMignon = orderFields.type.value === "Mignon";
+  const isClassic = orderFields.type.value === "Torta classica";
   cakeTopping.hidden = !isClassic;
-  cakeFields.topping.disabled = !isClassic;
+  orderFields.topping.disabled = !isClassic;
   cakeFormat.hidden = isMignon;
   cakeDecoration.hidden = isMignon;
-  cakeFields.size.disabled = isMignon;
-  cakeFields.inscription.disabled = isMignon;
+  orderFields.size.disabled = isMignon;
+  orderFields.inscription.disabled = isMignon;
   mignonWeight.hidden = !isMignon;
-  cakeFields.weight.disabled = !isMignon;
+  orderFields.weight.disabled = !isMignon;
   mignonPreferences.hidden = !isMignon;
   mignonPreferences.disabled = !isMignon;
   cakeFlavours.hidden = isMignon;
-  cakeFields.flavours.disabled = isMignon;
+  orderFields.flavours.disabled = isMignon;
 }
 
-cakeFields.type.addEventListener("change", updatePastryOptions);
+orderFields.type.addEventListener("change", updatePastryOptions);
 updatePastryOptions();
 
-cakeForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const fields = cakeForm.elements;
+function pastryDetails() {
+  const fields = orderFields;
   const details = [`Prodotto: ${fields.type.value}`];
 
   if (fields.type.value === "Mignon") {
@@ -118,10 +120,10 @@ cakeForm.addEventListener("submit", (event) => {
     const inscription = fields.inscription.value.trim();
     if (inscription) details.push(`Scritta sulla torta: ${inscription}`);
   }
-  sendRequest(cakeForm, details);
-});
+  return details;
+}
 
-const products = [...savouryForm.querySelectorAll(".quantity-row")].map((row) => {
+const products = [...savoury.querySelectorAll(".quantity-row")].map((row) => {
   const product = {
     row,
     quantity: row.querySelector("[data-quantity]"),
@@ -173,7 +175,7 @@ function selectedRustici() {
 function updateRusticiRecap() {
   const selected = selectedRustici();
   const total = selected.reduce((sum, item) => sum + item.pieces, 0);
-  rusticiRecap.hidden = total === 0;
+  rusticiRecap.hidden = savoury.hidden || total === 0;
   rusticiRecapTotal.textContent = `${total} ${total === 1 ? "pezzo" : "pezzi"}`;
   rusticiRecapItems.replaceChildren(...selected.map(({ product, name, pieces }, index) => {
     const item = document.createElement("li");
@@ -201,21 +203,29 @@ function updateRusticiRecap() {
   }));
 }
 
-savouryForm.addEventListener("submit", (event) => {
+orderForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const selected = selectedRustici();
-  rusticiError.hidden = selected.length > 0;
-  if (!selected.length) {
-    focusProduct(products[0]);
-    return;
-  }
+  const details = [];
 
-  const details = ["Rosticceria:", ...selected.map(({ name, pieces }) => `- ${name}: ${pieces} ${pieces === 1 ? "pezzo" : "pezzi"}`)];
-  const notes = savouryForm.elements.notes.value.trim();
-  if (notes) details.push(`Preferenze: ${notes}`);
-  sendRequest(savouryForm, details);
+  if (!savoury.hidden) {
+    const selected = selectedRustici();
+    rusticiError.hidden = selected.length > 0;
+    if (!selected.length) {
+      focusProduct(products[0]);
+      return;
+    }
+
+    if (!pastry.hidden) details.push("Pasticceria:", ...pastryDetails(), "");
+    details.push("Rosticceria:", ...selected.map(({ name, pieces }) => `- ${name}: ${pieces} ${pieces === 1 ? "pezzo" : "pezzi"}`));
+    const notes = orderFields.notes.value.trim();
+    if (notes) details.push(`Preferenze: ${notes}`);
+  } else {
+    details.push(...pastryDetails());
+  }
+  sendRequest(details);
 });
 
-updateRusticiRecap();
+orderSwitch.addEventListener("change", showSelectedForm);
+showSelectedForm();
 whatsapp.hidden = true;
 picker.hidden = false;

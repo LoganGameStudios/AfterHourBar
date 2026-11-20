@@ -121,15 +121,16 @@ h3 { font: 800 clamp(1.12rem, 2.1vw, 1.4rem)/1.25 var(--type); letter-spacing: -
 
 .order-form { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr); align-items: start; gap: 1rem clamp(1rem, 3.5vw, 2.5rem); margin-top: 1.25rem; }
 .order-products { min-width: 0; }
-#order-torte .order-products { display: grid; gap: .8rem; }
+.order-selection { display: grid; min-width: 0; gap: 1.35rem; }
+#order-torte { display: grid; gap: .8rem; }
 .order-side { display: grid; min-width: 0; gap: .85rem; padding: clamp(.85rem, 2vw, 1.25rem); border: 1px solid var(--line); border-radius: .85rem; background: #f4f7ef; }
 .order-side .order-group { border: 0; padding: 0; }
 .order-side .order-group legend { margin-bottom: .5rem; }
 .order-form .button { justify-self: start; }
 .order-switch, .order-group, .rustici-options { min-width: 0; border: 0; margin: 0; padding: 0; }
 .order-switch legend, .order-group legend, .rustici-options legend { padding: 0; font-weight: 800; font-size: .98rem; }
-.order-switch { max-width: 29rem; }
-.order-switch-options { display: grid; grid-template-columns: 1fr 1fr; gap: .35rem; margin-top: .6rem; padding: .25rem; border-radius: .75rem; background: var(--light); }
+.order-switch { max-width: 32rem; }
+.order-switch-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .35rem; margin-top: .6rem; padding: .25rem; border-radius: .75rem; background: var(--light); }
 .order-switch-options label { position: relative; }
 .order-switch-options input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .order-switch-options span { display: block; padding: .62rem .4rem; text-align: center; font-size: .89rem; font-weight: 800; border-radius: .55rem; cursor: pointer; }
