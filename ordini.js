@@ -55,6 +55,8 @@ const cakeFormat = document.querySelector("#cake-format");
 const cakeDecoration = document.querySelector("#cake-decoration");
 const cakeTopping = document.querySelector("#cake-topping-field");
 const mignonWeight = document.querySelector("#mignon-weight-field");
+const mignonPreferences = document.querySelector("#mignon-preferences");
+const cakeFlavours = document.querySelector("#cake-flavours-field");
 
 function updatePastryOptions() {
   const isMignon = cakeFields.type.value === "Mignon";
@@ -67,6 +69,10 @@ function updatePastryOptions() {
   cakeFields.inscription.disabled = isMignon;
   mignonWeight.hidden = !isMignon;
   cakeFields.weight.disabled = !isMignon;
+  mignonPreferences.hidden = !isMignon;
+  mignonPreferences.disabled = !isMignon;
+  cakeFlavours.hidden = isMignon;
+  cakeFields.flavours.disabled = isMignon;
 }
 
 cakeFields.type.addEventListener("change", updatePastryOptions);
@@ -75,13 +81,21 @@ updatePastryOptions();
 cakeForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const fields = cakeForm.elements;
-  fields.flavours.value = fields.flavours.value.trim();
-  const details = [`Prodotto: ${fields.type.value}`, `Gusti: ${fields.flavours.value}`];
+  const details = [`Prodotto: ${fields.type.value}`];
 
   if (fields.type.value === "Mignon") {
     const grams = Number(fields.weight.value);
     details.push(`Peso: ${grams} g`);
+    const preferences = new FormData(cakeForm);
+    const kinds = preferences.getAll("mignonType");
+    const creams = preferences.getAll("mignonCream");
+    const notes = fields.mignonNotes.value.trim();
+    if (kinds.length) details.push(`Tipi di mignon: ${kinds.join(", ")}`);
+    if (creams.length) details.push(`Creme: ${creams.join(", ")}`);
+    if (notes) details.push(`Altre preferenze: ${notes}`);
   } else {
+    fields.flavours.value = fields.flavours.value.trim();
+    details.push(`Gusti: ${fields.flavours.value}`);
     details.push(`Formato: ${fields.size.value}`);
     if (!fields.topping.disabled && fields.topping.value) {
       details.push(`Copertura: ${fields.topping.value}`);

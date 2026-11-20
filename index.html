@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=ritiro">
-<script src="ordini.js?v=10" defer></script>
+<link rel="stylesheet" href="style.css?v=mignon">
+<script src="ordini.js?v=11" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -131,7 +131,28 @@
                   <p class="field-help" id="mignon-weight-help">Da 250 g a 2,5 kg.</p>
                 </div>
               </div>
-              <div>
+              <fieldset class="mignon-preferences" id="mignon-preferences" hidden disabled>
+                <legend>Preferenze per i mignon</legend>
+                <p class="field-help">Puoi selezionare più tipi e creme.</p>
+                <div class="mignon-choice-grid">
+                  <fieldset class="mignon-choice">
+                    <legend>Tipi</legend>
+                    <label for="mignon-bigne"><input id="mignon-bigne" name="mignonType" type="checkbox" value="Bignè"><span>Bignè</span></label>
+                    <label for="mignon-cannolini"><input id="mignon-cannolini" name="mignonType" type="checkbox" value="Cannolini"><span>Cannolini</span></label>
+                    <label for="mignon-baba"><input id="mignon-baba" name="mignonType" type="checkbox" value="Mini babà"><span>Mini babà</span></label>
+                    <label for="mignon-tartellette"><input id="mignon-tartellette" name="mignonType" type="checkbox" value="Tartellette"><span>Tartellette</span></label>
+                  </fieldset>
+                  <fieldset class="mignon-choice">
+                    <legend>Creme</legend>
+                    <label for="mignon-cioccolato"><input id="mignon-cioccolato" name="mignonCream" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
+                    <label for="mignon-crema"><input id="mignon-crema" name="mignonCream" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
+                    <label for="mignon-ricotta"><input id="mignon-ricotta" name="mignonCream" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
+                  </fieldset>
+                </div>
+                <label for="mignon-notes">Altre preferenze <span class="field-optional">· facoltativo</span></label>
+                <input id="mignon-notes" name="mignonNotes" type="text" maxlength="160" placeholder="Indica eventuali altri tipi o gusti">
+              </fieldset>
+              <div id="cake-flavours-field">
                 <label for="cake-flavours">Gusti</label>
                 <input id="cake-flavours" name="flavours" type="text" maxlength="160" placeholder="Indica uno o più gusti" required>
               </div>
