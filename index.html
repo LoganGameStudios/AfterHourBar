@@ -8,8 +8,8 @@
 <meta name="referrer" content="no-referrer">
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
-<link rel="stylesheet" href="style.css?v=mignon">
-<script src="ordini.js?v=11" defer></script>
+<link rel="stylesheet" href="style.css?v=gusti">
+<script src="ordini.js?v=12" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -133,17 +133,65 @@
               </div>
               <fieldset class="mignon-preferences" id="mignon-preferences" hidden disabled>
                 <legend>Preferenze per i mignon</legend>
-                <p class="field-help">Puoi selezionare più tipi e creme.</p>
-                <div class="mignon-choice-grid">
-                  <fieldset class="mignon-choice">
-                    <legend>Tipi</legend>
+                <p class="field-help">Scegli i tipi che preferisci, poi abbina i gusti.</p>
+                <div class="mignon-choice-stack">
+                  <fieldset class="mignon-choice mignon-types">
+                    <legend>Tipi di mignon</legend>
+                    <div class="mignon-type-grid">
                     <label for="mignon-bigne"><input id="mignon-bigne" name="mignonType" type="checkbox" value="Bignè"><span>Bignè</span></label>
                     <label for="mignon-cannolini"><input id="mignon-cannolini" name="mignonType" type="checkbox" value="Cannolini"><span>Cannolini</span></label>
                     <label for="mignon-baba"><input id="mignon-baba" name="mignonType" type="checkbox" value="Mini babà"><span>Mini babà</span></label>
                     <label for="mignon-tartellette"><input id="mignon-tartellette" name="mignonType" type="checkbox" value="Tartellette"><span>Tartellette</span></label>
+                    </div>
                   </fieldset>
-                  <fieldset class="mignon-choice">
-                    <legend>Creme</legend>
+                  <fieldset class="order-switch mignon-mode">
+                    <legend>Come vuoi scegliere i gusti?</legend>
+                    <div class="order-switch-options">
+                      <label><input type="radio" name="mignonMode" value="specifici" checked><span>Un gusto per tipo</span></label>
+                      <label><input type="radio" name="mignonMode" value="mix"><span>Mix di gusti</span></label>
+                    </div>
+                  </fieldset>
+                  <div class="mignon-by-type" id="mignon-by-type" hidden>
+                  <div class="mignon-flavour-row" data-mignon-kind="Bignè" hidden>
+                    <label for="mignon-flavour-bigne">Bignè</label>
+                    <select id="mignon-flavour-bigne" disabled>
+                      <option value="">A scelta del bar</option>
+                      <option>Cioccolato</option>
+                      <option>Crema pasticcera</option>
+                      <option>Ricotta</option>
+                    </select>
+                  </div>
+                  <div class="mignon-flavour-row" data-mignon-kind="Cannolini" hidden>
+                    <label for="mignon-flavour-cannolini">Cannolini</label>
+                    <select id="mignon-flavour-cannolini" disabled>
+                      <option value="">A scelta del bar</option>
+                      <option>Cioccolato</option>
+                      <option>Crema pasticcera</option>
+                      <option>Ricotta</option>
+                    </select>
+                  </div>
+                  <div class="mignon-flavour-row" data-mignon-kind="Mini babà" hidden>
+                    <label for="mignon-flavour-baba">Mini babà</label>
+                    <select id="mignon-flavour-baba" disabled>
+                      <option value="">A scelta del bar</option>
+                      <option>Cioccolato</option>
+                      <option>Crema pasticcera</option>
+                      <option>Ricotta</option>
+                    </select>
+                  </div>
+                  <div class="mignon-flavour-row" data-mignon-kind="Tartellette" hidden>
+                    <label for="mignon-flavour-tartellette">Tartellette</label>
+                    <select id="mignon-flavour-tartellette" disabled>
+                      <option value="">A scelta del bar</option>
+                      <option>Cioccolato</option>
+                      <option>Crema pasticcera</option>
+                      <option>Ricotta</option>
+                    </select>
+                  </div>
+                  </div>
+                  <fieldset class="mignon-choice" id="mignon-mix" hidden disabled>
+                    <legend>Gusti del mix</legend>
+                    <p class="field-help">Seleziona almeno due gusti.</p>
                     <label for="mignon-cioccolato"><input id="mignon-cioccolato" name="mignonCream" type="checkbox" value="Cioccolato"><span>Cioccolato</span></label>
                     <label for="mignon-crema"><input id="mignon-crema" name="mignonCream" type="checkbox" value="Crema pasticcera"><span>Crema pasticcera</span></label>
                     <label for="mignon-ricotta"><input id="mignon-ricotta" name="mignonCream" type="checkbox" value="Ricotta"><span>Ricotta</span></label>
