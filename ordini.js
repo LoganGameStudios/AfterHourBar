@@ -51,7 +51,7 @@ const cakeFields = cakeForm.elements;
 const cakeFormat = document.querySelector("#cake-format");
 const cakeDecoration = document.querySelector("#cake-decoration");
 const cakeTopping = document.querySelector("#cake-topping-field");
-const mignonQuantity = document.querySelector("#mignon-quantity");
+const mignonWeight = document.querySelector("#mignon-weight-field");
 
 function updatePastryOptions() {
   const isMignon = cakeFields.type.value === "Mignon";
@@ -62,8 +62,8 @@ function updatePastryOptions() {
   cakeDecoration.hidden = isMignon;
   cakeFields.size.disabled = isMignon;
   cakeFields.inscription.disabled = isMignon;
-  mignonQuantity.hidden = !isMignon;
-  cakeFields.pieces.disabled = !isMignon;
+  mignonWeight.hidden = !isMignon;
+  cakeFields.weight.disabled = !isMignon;
 }
 
 cakeFields.type.addEventListener("change", updatePastryOptions);
@@ -76,7 +76,7 @@ cakeForm.addEventListener("submit", (event) => {
   const details = [`Prodotto: ${fields.type.value}`, `Gusti: ${fields.flavours.value}`];
 
   if (fields.type.value === "Mignon") {
-    if (fields.pieces.value) details.push(`Quantità: ${fields.pieces.value} pezzi`);
+    details.push(`Peso: ${fields.weight.valueAsNumber} g`);
   } else {
     details.push(`Formato: ${fields.size.value}`);
     if (!fields.topping.disabled && fields.topping.value) {

@@ -9,7 +9,7 @@
 <title>After Hour Bar · Caffetteria e pasticceria a Floridia</title>
 <link rel="icon" type="image/png" href="logo-after-hour-05-verde.png">
 <link rel="stylesheet" href="style.css?v=varieta">
-<script src="ordini.js?v=6" defer></script>
+<script src="ordini.js?v=7" defer></script>
 <script src="effetti.js" defer></script>
 </head>
 <body>
@@ -118,9 +118,10 @@
                 </select>
                 <p class="field-help" id="cake-size-help">Il formato determina il peso della torta.</p>
               </div>
-              <div id="mignon-quantity" hidden>
-                <label for="mignon-pieces">Numero di mignon <span class="field-optional">· facoltativo</span></label>
-                <input id="mignon-pieces" name="pieces" type="number" min="1" step="1" inputmode="numeric" disabled>
+              <div id="mignon-weight-field" hidden>
+                <label for="mignon-weight">Peso dei mignon (g)</label>
+                <input id="mignon-weight" name="weight" type="number" min="250" step="1" inputmode="numeric" aria-describedby="mignon-weight-help" required disabled>
+                <p class="field-help" id="mignon-weight-help">Ordine minimo: 250 g.</p>
               </div>
             </div>
             <div>
